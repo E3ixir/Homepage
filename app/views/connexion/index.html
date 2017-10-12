@@ -7,90 +7,115 @@
 
 </head>
 <body>
-<style>
-#cadreco 
-{
-   border:2px solid white ;
-   border-radius: 20px;
-   width:650px;
-   height:450px;
-   margin-left: auto;
-   margin-right: auto;
-   font-weight: bold;
-}
+    <style>
 
-#cadrelog
-{
-	border:2px solid white;
-	border-radius: 20px;
-   	width:650px;
-   	height:300px;
-   	margin-left: auto;
-   	margin-right: auto;
-   	font-weight: bold;
-   	text-align: left;
-}
+        #cadreco 
+        {
+           border:2px solid white ;
+           border-radius: 20px;
+           width:650px;
+           height:450px;
+           margin-left: auto;
+           margin-right: auto;
+           font-weight: bold;
+        }
 
-#encadre0
-{
-	margin-left: 4px;
-	font-weight: bold;
-	width: 250px;
-}
+        #cadrelog
+        {
+        	border:2px solid white;
+        	border-radius: 20px;
+           	width:650px;
+           	height:300px;
+           	margin-left: auto;
+           	margin-right: auto;
+           	font-weight: bold;
+           	text-align: left;
+        }
 
-#encadre1
-{
-	margin-left: 4px;
-	font-weight: bold;
-	width: 250px;
-}
+        #encadre0
+        {
+        	margin-left: 4px;
+        	font-weight: bold;
+        	width: 250px;
+        }
 
-#encadre2
-{
-	margin-left: 4px;
-	font-weight: bold;
-	width: 250px;
+        #encadre1
+        {
+        	margin-left: 4px;
+        	font-weight: bold;
+        	width: 250px;
+        }
 
-}
+        #encadre2
+        {
+        	margin-left: 4px;
+        	font-weight: bold;
+        	width: 250px;
 
-#aligne
-{
-	text-align: center;
-}
+        }
 
-#color
-{
-	margin-left: 5px;
-	color: white;
-}
+        #aligne
+        {
+        	text-align: center;
+        }
 
-#titre
-{
-	color: white;
-	font-size: 20px;
-}
+        #color
+        {
+        	margin-left: 5px;
+        	color: white;
+        }
 
-form
-{
-	color: black;
+        #titre
+        {
+        	color: white;
+        	font-size: 20px;
+        }
 
-}
+        form
+        {
+        	color: black;
 
-body
-{
-	background: url(image/img2.jpg) fixed no-repeat right top;
-	background-position: center;
+        }
 
-}
+        body
+        {
+        	background: url(image/img2.jpg) fixed no-repeat right top;
+        	background-position: center;
 
-.bouton
-{
-	margin-left: 4px;
-} 
-</style>
+        }
+
+        .bouton
+        {
+        	margin-left: 4px;
+        } 
+
+        #map 
+        {
+            margin: auto;
+            height: 85%;
+            width: 99%;
+        }
+
+    </style>
 <div id="cadreco">
     <p id="aligne"><b id = "titre">Authentification</b></p>
-    <p>Bonjour mon copain</p>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat: 49.2015847, lng: -0.3804248};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlUip8Tw5Z5mqYr6fum2xwwaSFQq7loiU&callback=initMap">
+    </script>
     <br>
     <br>
 </div>
