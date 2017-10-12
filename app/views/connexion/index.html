@@ -1,6 +1,5 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="style.css" />
 <link rel="shortcut icon" href="image/ico1.ico">
 <title>Site</title>
 <head>
@@ -79,8 +78,12 @@
 
         body
         {
-        	background: url(image/img2.jpg) fixed no-repeat right top;
-        	background-position: center;
+        	background: url(image/img3.png) no-repeat;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            font-family: sans-serif;
+            opacity: .9;
 
         }
 
@@ -96,10 +99,18 @@
             width: 99%;
         }
 
+        /*.blur 
+        {
+            width: auto;
+            position: relative;
+            background: transparent url(image/image2.jpg) 3px 3px no-repeat;
+            opacity: .9;
+        } */
+
     </style>
-<div id="cadreco">
+<div class="container" id="cadreco">
     <p id="aligne"><b id = "titre">Authentification</b></p>
-    <div id="map"></div>
+    <div id="map" ></div>
     <script>
       function initMap() {
         var uluru = {lat: 49.2015847, lng: -0.3804248};
