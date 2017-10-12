@@ -1,0 +1,79 @@
+#cadreco 
+{
+   border:2px solid white ;
+   border-radius: 20px;
+   width:650px;
+   height:450px;
+   margin-left: auto;
+   margin-right: auto;
+   font-weight: bold;
+}
+
+#cadrelog
+{
+	border:2px solid white;
+	border-radius: 20px;
+   	width:650px;
+   	height:300px;
+   	margin-left: auto;
+   	margin-right: auto;
+   	font-weight: bold;
+   	text-align: left;
+}
+
+#encadre0
+{
+	margin-left: 4px;
+	font-weight: bold;
+	width: 250px;
+}
+
+#encadre1
+{
+	margin-left: 4px;
+	font-weight: bold;
+	width: 250px;
+}
+
+#encadre2
+{
+	margin-left: 4px;
+	font-weight: bold;
+	width: 250px;
+
+}
+
+#aligne
+{
+	text-align: center;
+}
+
+#color
+{
+	margin-left: 5px;
+	color: white;
+}
+
+#titre
+{
+	color: white;
+	font-size: 20px;
+}
+
+form
+{
+	color: black;
+
+}
+
+body
+{
+	background: url(image/img2.jpg) fixed no-repeat right top;
+	background-position: center;
+
+}
+
+.bouton
+{
+	margin-left: 4px;
+} 
