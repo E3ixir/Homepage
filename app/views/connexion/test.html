@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="image/ico1.ico">
+        <title>Site</title>
+    </head>
+
+    <body>
+        <style>
+
+        body
+            {
+                background: url(image/img4.jpg) no-repeat;
+                margin: 0;
+                padding: 0;
+                background-size: cover;
+                font-family: sans-serif;
+            }
+
+        .title
+        {
+            text-align: center;
+            padding: 50px 0 20px;
+        }
+
+        .title h1
+        {
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-transform: uppercase;
+            font-size: 36px;
+        }
+
+        .container
+        {
+            width: 50%;
+            height: 400px;
+            background: #fff;
+            margin: 0 auto; 
+            border: 2px solid #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,.5);
+        }
+
+        .container .gauche
+        {
+            float: left;
+            width: 50%;
+            height: 400px;
+            background: url(image/img4.jpg);
+            background-size: cover;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+        }
+
+        .container .droite
+        {
+            float: right;
+            width: 50%;
+            height: 400px;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+        }
+
+        .boiteco
+        {
+            width: 100%;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            height: 400px;
+            background: #fff;
+        }
+
+        .boiteco p
+        {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #DA5B16;
+        }
+
+        .boiteco input
+        {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .boiteco input[type="text"],
+        .boiteco input[type="Password"]
+        {
+            border: none;
+            border-bottom: 2px solid white;
+            outline: none;
+            height: 40px;  
+        }
+        .boiteco input[type="text"]:focus,
+        .boiteco input[type="Password"]:focus
+        {
+            border-bottom: 2px solid #40A497;
+        }
+
+        .boiteco input[type="submit"]
+        {
+            border: none;
+            outline: none;
+            height: 40px;
+            color: #DA5B16;
+            background: #262626;
+            cursor: pointer;
+        }
+
+        .boiteco input[type="submit"]:hover
+        {
+            background: #40A497;
+        }
+
+        .boiteco a 
+        {
+            color: #262626;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+         </style>
+        
+        <div class="title"><h1>Page de connexion</h1></div>
+        <div class="container">
+            <div class="gauche"></div>
+            <div class="droite">
+                <div class="boiteco">
+                    <form>
+                        <p>Nom d'utilisateur</p> 
+                        <input type="text" name="" placeholder="entrer votre nom d'utilisateur">
+                        <p>Mot de passe</p> 
+                        <input type="Password" name="" placeholder="*******">
+                        <input type="submit" name="" value="Valider">
+                        <a href="#">Mot de passe oublié</a>
+                    </form>
+                </div>
+            </div>
+        </div>        
+        </body>
+</html>
