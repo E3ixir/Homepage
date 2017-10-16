@@ -111,7 +111,7 @@
             border: none;
             outline: none;
             height: 40px;
-            color: #DA5B16;
+            color: white;
             background: #262626;
             cursor: pointer;
         }
@@ -126,6 +126,15 @@
             color: #262626;
             font-size: 12px;
             font-weight: bold;
+        }
+
+        #hautdroit
+        {
+            position : absolute;
+            width: 30px;
+            height: 30px;
+            left : 105%;
+            margin-left : -340px;
         }
 
         </style>
@@ -187,6 +196,7 @@ function initMap() {
 </script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlUip8Tw5Z5mqYr6fum2xwwaSFQq7loiU&callback=initMap"></script>
                 <div class="droite">
+                    <a href="SiteController"><img id="hautdroit" src="assets/images/img2.png" /></a>
                     <div class="boiteco">
                         <form>
                             <p>Nom d'utilisateur</p> 
