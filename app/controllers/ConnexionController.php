@@ -9,7 +9,7 @@ class ConnexionController extends ControllerBase
      * @route("/connexion_utilisateur")
      */
     public function index(){
-        $this->loadView("connexion/test.html");
+        $this->loadView("connexion/index.html");
     }
     
 }
