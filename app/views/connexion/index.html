@@ -146,55 +146,45 @@
             </div>
             <script>
 
-  
 function placeMarkerAndPanTo(latLng, map) {
-  var marker = new google.maps.Marker({
-    position: latLng,
-    map: map
+        var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
   });
-  map.panTo(latLng);
 }
 
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: {lat: 49.182863, lng: -0.370679 }
-  });
+        var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat: 49.182863, lng: -0.370679 }
+});
 
-  map.addListener('click', function(event) {
-    placeMarkerAndPanTo(event.latLng, map);
-    document.getElementById('lat').value=event.latLng.lat();
-    document.getElementById('lng').value=event.latLng.lng();
-  });
+        map.addListener('click', function(event) {
+        placeMarkerAndPanTo(event.latLng, map);
+        document.getElementById('lat').value=event.latLng.lat();
+        document.getElementById('lng').value=event.latLng.lng();
+});
 
 
-  var lngSpan = bounds.east - bounds.west;
-  var latSpan = bounds.north - bounds.south;
-  for (var i = 0; i < secretMessages.length; ++i) {
-    var marker = new google.maps.Marker({
-      position: {
+        var lngSpan = bounds.east - bounds.west;
+        var latSpan = bounds.north - bounds.south;
+        for (var i = 0; i < secretMessages.length; ++i) {
+        var marker = new google.maps.Marker({
+        position: {
         lat: bounds.south + latSpan * Math.random(),
         lng: bounds.west + lngSpan * Math.random()
-      },
-      map: map
+        },
+        map: map
     });
   }
 }
 
-    function attachSecretMessage(marker) {
+        function attachSecretMessage(marker) {
         var infowindow = new google.maps.InfoWindow({
         });
-
-    marker.addListener('click', function() {
-        infowindow.open(marker.get('map'), marker);
-        document.getElementById("lat").value=event.latLng.lat();
-        document.getElementById("lng").value=event.latLng.lng();
-
-  });
-
 }
-</script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlUip8Tw5Z5mqYr6fum2xwwaSFQq7loiU&callback=initMap"></script>
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlUip8Tw5Z5mqYr6fum2xwwaSFQq7loiU&callback=initMap"></script>
                 <div class="droite">
                     <a href="SiteController"><img id="hautdroit" src="assets/images/img2.png" /></a>
                     <div class="boiteco">
