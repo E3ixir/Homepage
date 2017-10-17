@@ -1,17 +1,64 @@
-<div class="ui container">
-	{{q["buttons"] | raw}}
-	<div id="divUsers">Liste des sites</div>
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="image/ico1.ico">
+        <title>Site</title>
+    </head>
 
-{{script_foot | raw}}
-<style>
-body
-            {
-                background: url(assets/images/img5.png) no-repeat;
-                margin: 0;
-                padding: 0;
-                background-size: cover;
-                font-family: sans-serif;
-            }
+    <body>
+    	<div class="container">
+	    	<form action="https://encrypted.google.com/search?hl=fr&amp;source=hp&amp;q=" id="myform">
+		        <p><input id="barre" type="text" name="q" value="" /></p>
+		        <ul>
+		        	<a>Moteurs de recherche</a>
+					<li><input id="Duck" type="submit" value="DuckDuckGo"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Google" type="submit" value="Google"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Ecosia" type="submit" value="Ecosia"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Bing" type="submit" value="Bing"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Yahoo!" type="submit" value="Yahoo!"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    	</ul>
+	    	</form>
+    	</div>
+    	
+	<style>
+		body
+        {
+            background: url(assets/images/img5.png) no-repeat;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            font-family: sans-serif;
+        }
 
-</style>
+        .container
+	    {
+	        width: 90%;
+	        height: 170px;
+	        background: transparent;
+	        margin: 0 auto;
+	    }
+
+	    ul
+	    {
+	    	text-align: right;
+	    }
+
+	    li
+	    {
+	    	list-style-type: none;
+	    }
+
+	    #barre
+	    {
+	    	width: 60%;
+	    	height: 50px;
+	    	margin-top: 5%;
+	    	margin-left: 5%;
+	    	margin-bottom: 5%;
+
+	    }
+
+	</style>
+    </body>
+</html>
