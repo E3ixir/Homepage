@@ -13,12 +13,18 @@
 		        <ul>
 		        	<a>Moteurs de recherche</a>
 					<li><input id="Duck" type="submit" value="DuckDuckGo"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
-		    		<li><input id="Google" type="submit" value="Google"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
-		    		<li><input id="Ecosia" type="submit" value="Ecosia"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
-		    		<li><input id="Bing" type="submit" value="Bing"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
-		    		<li><input id="Yahoo!" type="submit" value="Yahoo!"onclick="document.getElementById('myform').action='https://duckduckgo.com/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Google" type="submit" value="Google"onclick="document.getElementById('myform').action='https://www.google.fr/search?source=q=';"></a></li>
+		    		<li><input id="Ecosia" type="submit" value="Ecosia"onclick="document.getElementById('myform').action='https://www.ecosia.org/search?q=';"></a></li>
+		    		<li><input id="Bing" type="submit" value="Bing"onclick="document.getElementById('myform').action='https://www.bing.com/?cc=fr/?kh=1&amp;kl=fr-fr&amp;q=';"></a></li>
+		    		<li><input id="Yahoo!" type="submit" value="Yahoo!"onclick="document.getElementById('myform').action='https://fr.yahoo.com/search?p"/></a></li>
 		    	</ul>
 	    	</form>
+<!--<script>
+	    	$("q.lien_ext").onclick(function() {
+  window.open($(this).attr("https"));
+  return false;
+});
+	    	</script>-->
     	</div>
     	
 	<style>
@@ -42,6 +48,11 @@
 	    ul
 	    {
 	    	text-align: right;
+	    	padding: 10%;
+	    	margin: 10%;
+	    	list-style: none;
+	    	line-height: 21px;
+	    	text-align: left;
 	    }
 
 	    li
@@ -56,8 +67,10 @@
 	    	margin-top: 5%;
 	    	margin-left: 5%;
 	    	margin-bottom: 5%;
+	    	font-size: 150%;
 
 	    }
+
 
 	</style>
     </body>
