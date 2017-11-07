@@ -1,0 +1,61 @@
+		body
+        {
+            background: url(../images/img5.png) no-repeat;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+
+        .container1
+	    {
+	    	margin-top: 5%;
+	    	display: flex;
+	    	justify-content: left;
+	    	margin-left: 5%;
+	    }
+
+	    #bdr
+	    {
+	    	
+	       
+	    }
+
+	    #bdr input
+	    {
+	    	width: 2000px;
+	        background: transparent;
+	        margin: 0 auto;
+	    }
+
+	    #mdr
+	    {
+	    	text-align: right;
+	    	padding: 10%;
+	    	margin: 10%;
+	    	list-style: none;
+	    	line-height: 21px;
+	    	text-align: left;
+	    }
+
+
+	    li
+	    {
+	    	list-style-type: none;
+	    }
+
+	    #barre
+	    {
+	    	width: 60%;
+	    	height: 40px;
+	    	margin-top: 5%;
+	    	margin-left: 5%;
+	    	margin-bottom: 5%;
+	    	font-size: 150%;
+
+	    }
+
+	    input
+	    {
+	    	width: 110px;
+	    }
