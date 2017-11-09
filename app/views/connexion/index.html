@@ -58,17 +58,17 @@ function initMap() {
                 <div class="droite">
                     <a href="SiteController"><img id="hautdroit" src="assets/images/img2.png" /></a>
                     <div class="boiteco">
-                        <form>
+                        <form method="post" action="userRegister">
                             <p>Nom d'utilisateur</p> 
-                            <input type="text" name="" placeholder="entrer votre nom d'utilisateur">
+                            <input type="text" name="login" placeholder="entrer votre nom d'utilisateur">
                             <p>Mot de passe</p> 
-                            <input type="Password" name="" placeholder="*******">
+                            <input type="Password" name="password" placeholder="*******">
                             <p>Confirmer votre mot de passe</p>
-                            <input type="Password" name="" placeholder="*******">
+                            <input type="Password" name="password_bis" placeholder="*******">
                             <p>Latitude</p>
-                            <input id="lat" type="text" name="" placeholder="" disabled="disabled">
+                            <input id="lat" type="text" name="lat" placeholder="" disabled="disabled">
                             <p>Longitude</p>
-                            <input id="lng" type="text" name="" placeholder="" disabled="disabled">
+                            <input id="lng" type="text" name="lng" placeholder="" disabled="disabled">
                             <input type="submit" name="" value="Valider">
                         </form>
                     </div>

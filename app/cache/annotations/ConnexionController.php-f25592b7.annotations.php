@@ -4,6 +4,9 @@ return array(
   '#namespace' => 'controllers',
   '#uses' => array (
   'ControllerBase' => 'controllers\\ControllerBase',
+  'DAO' => 'micro\\orm\\DAO',
+  'RequestUtils' => 'micro\\utils\\RequestUtils',
+  'Utilisateur' => 'models\\Utilisateur',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\ConnexionController' => 
@@ -12,6 +15,9 @@ return array(
 ),
   'controllers\\ConnexionController::index' => array(
     array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/connexion_utilisateur")
+  ),
+  'controllers\\ConnexionController::userRegister' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userRegister")
   ),
 );
 

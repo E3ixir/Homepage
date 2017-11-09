@@ -6,6 +6,7 @@ return array(
   'Annotations' => 'mindplay\\annotations\\Annotations',
   'JArray' => 'micro\\utils\\JArray',
   'Annotation' => 'mindplay\\annotations\\Annotation',
+  'ClassUtils' => 'micro\\cache\\ClassUtils',
 ),
   '#traitMethodOverrides' => array (
   'micro\\annotations\\BaseAnnotation' => 
