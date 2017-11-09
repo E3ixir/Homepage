@@ -25,11 +25,13 @@
 
 	    .mdrcadre
 	    {
+	    	padding-top: 10px;
+	    	height: 40px;
 	    	border: 2px solid white;
-
 	    }
 	    .mdrcadre a
 	    {
+	    	color:#4d4d33;
 	    	cursor: default;
 	    }
 
