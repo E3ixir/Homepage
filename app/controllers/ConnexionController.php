@@ -35,7 +35,7 @@ class ConnexionController extends ControllerBase
             echo $user->getLogin()." ajouté";
             echo "<br><br>";
             echo "Vous allez etre redirigé dans quelques secondes...";
-            header('Refresh: 3; url=/homepage/connexion_utilisateur');
+            header('Refresh: 3; url=/homepage/SiteController');
             ob_flush();
         }
     }
