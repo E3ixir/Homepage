@@ -23,5 +23,8 @@ return array(
   'controllers\\SiteController::all' => array(
     array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/all","cache"=>true,"duration"=>15)
   ),
+  'controllers\\SiteController::menu' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "menu/")
+  ),
 );
 

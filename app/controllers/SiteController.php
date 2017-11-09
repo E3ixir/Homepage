@@ -17,8 +17,8 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("buttons",["Liste des sites","Ajouter un site..."]);
-        $bts->setPropertyValues("data-ajax", ["all/","addUser/"]);
+        $bts=$semantic->htmlButtonGroups("buttons",["Liste des sites","Ajouter un site...","Menu"]);
+        $bts->setPropertyValues("data-ajax", ["all/","addUser/","menu/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
         $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
@@ -35,6 +35,16 @@ class SiteController extends ControllerBase{
         $table->addEditDeleteButtons(false);
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
-    }     
-
+    }
+    
+    /**
+    *@route("menu/")
+    */
+    public function menu(){
+        $menu=$semantic->htmlMenu("menu8");
+        $menu->addMenuAsItem(["Enterprise","Consumer"],"Products");
+        $menu->addMenuAsItem(["Rails","Python","PHP"],"CMS solutions");
+        $menu->setVertical();
+        echo $menu;
+    }
 }
