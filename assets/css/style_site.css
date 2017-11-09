@@ -18,34 +18,20 @@
 
 	    #mdr 
 	    {
-	    	
+	    
 	    	list-style: none;
 	    	line-height: 21px;
 	    }
 
+
 	    .mdrcadre
 	    {
 	    	border: 2px solid white;
-	    }
 
-	    nav
-	    {
-	    	float: left;
-	    	background-color: white;
-	    	position: relative;
 	    }
-
-	    nav > ul::after
+	    .mdrcadre a
 	    {
-	    	content: "";
-	    	display: block;
-	    	clear: both;
-	    }
-
-	    nav > ul > li 
-	    {
-	    	padding:20px 30px;
-	    	color: red;
+	    	cursor: default;
 	    }
 
 	    li
@@ -56,7 +42,7 @@
 
 	    #barre
 	    {
-	    	width: 260%;
+	    	width: 240%;
 	    	height: 40px;
 	    	font-size: 150%;
 
@@ -67,10 +53,13 @@
 	    	width: 110px;
 	    }
 
+	    /* menu de navigation*/
+
 	    .submenu
 	    {
 	    	display: none;
 	    }
+
 	    nav li:hover .submenu
 	    {
 	    	display: inline-block;
@@ -92,4 +81,29 @@
 	    	font-size: 13px;
 	    	color: red;
 	    	width: 220px;
+	    }
+
+	    nav
+	    {
+	    	float: left;
+	    	background-color: white;
+	    	position: relative;
+	    }
+	    nav > ul 
+	    {
+	    	margin: 0px;
+	    	padding: 0px;
+	    }
+
+	    nav > ul::after
+	    {
+	    	content: "";
+	    	display: block;
+	    	clear: both;
+	    }
+
+	    nav > ul > li 
+	    {
+	    	padding:20px 30px;
+	    	color: red;
 	    }
