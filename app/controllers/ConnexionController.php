@@ -33,6 +33,10 @@ class ConnexionController extends ControllerBase
         $user->setSite($site);
         if(DAO::insert($user)){
             echo $user->getLogin()." ajouté";
+            echo "<br><br>";
+            echo "Vous allez etre redirigé dans quelques secondes...";
+            header('Refresh: 3; url=/homepage/connexion_utilisateur');
+            ob_flush();
         }
     }
     
