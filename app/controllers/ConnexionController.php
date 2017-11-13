@@ -13,7 +13,6 @@ class ConnexionController extends ControllerBase
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("buttons",["Connexion"]);
         $bts->setPropertyValues("data-ajax", ["userConnection/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
         $this->jquery->compile($this->view);

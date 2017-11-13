@@ -18,6 +18,7 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
+        $bts=$semantic->htmlButtonGroups("buttons",["Connexion"]);
         $bts=$semantic->htmlButtonGroups("buttons",["Liste des sites","Ajouter un site...","Menu"]);
         $bts->setPropertyValues("data-ajax", ["all/","addUser/","menu/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
