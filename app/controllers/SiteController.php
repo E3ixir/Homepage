@@ -19,9 +19,10 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("buttons-1",["Liste des favoris","Ajouter un favoris","Modifier un favoris"]);
+        $bts=$semantic->htmlButtonGroups("buttons-1",["Liste des favoris","Ajouter un favoris","Modifier un favoris"]);  
         $bts->setPropertyValues("data-ajax", ["listeFav/","addUrl/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
+        $bt2=$semantic->htmlButton("button-3","Se d&eacute;connecter");
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
@@ -75,6 +76,25 @@ class SiteController extends ControllerBase{
         $table->addEditButton(true);
         echo $table->compile($this->jquery);
         echo  $th->jquery->compile();
+    }
+    
+    /**
+     * @route("/liensweb")
+     */
+    public function printLien(){
+        $liens=DAO::getAll("models\Lienweb");
+        $semantic=$this->jquery->semantic();
+        $table=$semantic->dataTable("tblLiens", "models\Lienweb", $liens);
+        $table->setFields(["id","libelle","url"]);
+        $table->setCaptions(["ID","Nom","URL","Actions"]);
+        $table->addEditDeleteButtons(false);
+        echo $table->compile($this->jquery);
+        echo $this->jquery->compile();
+    }
+    
+    public function disconnected(){
+        session_unset();
+        session_destroy();
     }
     
     
