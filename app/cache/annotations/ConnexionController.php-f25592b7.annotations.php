@@ -3,10 +3,10 @@
 return array(
   '#namespace' => 'controllers',
   '#uses' => array (
-  'ControllerBase' => 'controllers\\ControllerBase',
   'DAO' => 'micro\\orm\\DAO',
   'RequestUtils' => 'micro\\utils\\RequestUtils',
   'Utilisateur' => 'models\\Utilisateur',
+  'HtmlFormInput' => 'Ajax\\semantic\\html\\collections\\form\\HtmlFormInput',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\ConnexionController' => 
@@ -18,6 +18,9 @@ return array(
   ),
   'controllers\\ConnexionController::userRegister' => array(
     array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userRegister")
+  ),
+  'controllers\\ConnexionController::userConnection' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userConnection")
   ),
 );
 

@@ -8,6 +8,7 @@ return array(
   'Site' => 'models\\Site',
   'RequestUtils' => 'micro\\utils\\RequestUtils',
   'models' => 'models',
+  'HtmlFormInput' => 'Ajax\\semantic\\html\\collections\\form\\HtmlFormInput',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\SiteController' => 
