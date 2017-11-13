@@ -22,7 +22,7 @@ class SiteController extends ControllerBase{
         $bts=$semantic->htmlButtonGroups("buttons-1",["Liste des favoris","Ajouter un favoris","Modifier un favoris"]);  
         $bts->setPropertyValues("data-ajax", ["listeFav/","addUrl/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
-        $bt2=$semantic->htmlButton("button-3","Se d&eacute;connecter");
+        $bt2=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
