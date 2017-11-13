@@ -6,6 +6,7 @@ use models\Site;
 use micro\utils\RequestUtils;
 use models;
 use Ajax\semantic\html\collections\form\HtmlFormInput;
+use Ajax\semantic\widgets\business\user\FormLogin;
  
 /**
  * Controller SiteController
@@ -18,10 +19,22 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("buttons",["Connexion"]);
-        $bts=$semantic->htmlButtonGroups("buttons",["Liste des sites","Ajouter un site...","Menu"]);
-        $bts->setPropertyValues("data-ajax", ["all/","addUser/","menu/"]);
+        $bts=$semantic->htmlButtonGroups("buttons-1",["Liste des favoris","Ajouter un favoris","Modifier un favoris"]);
+        $bts->setPropertyValues("data-ajax", ["listeFav/","addUrl/"]);
         $bts->getOnClick("","#divUsers",["attr"=>"data-ajax"]);
+        $frm=$semantic->defaultLogin("frm1");
+        $frm->removeField("Connection");
+        $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
+        $frm->setCaption("remember", "Se souvenir de moi.");
+        $frm->setCaption("submit", "Connexion");
+        $frm->setCaption("login", "Pseudo");
+        $frm->setCaption("password", "Mot de passe");
+        $frm->fieldAsSubmit("submit","green fluide","sTest/dePost","#frm1-submit");
+        $bt=$semantic->htmlButton("buttons-2","Se connecter","green","$('#modal-frm1').modal('show');");
+        $bt->addIcon("sign in");
+        echo $frm->asModal();
+        $this->jquery->exec("$('#modal-connect').modal('show');",true);
+        echo $this->jquery->compile($this->view);
         $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
     }
@@ -49,4 +62,20 @@ class SiteController extends ControllerBase{
         $menu->setVertical();
         echo $menu;
     }
+    
+    /**
+    *@route("listeFav/")
+    */ 
+    public function listeFav(){
+        $fav=DAO::getAll("models\Lienweb");
+        $semantic=$this->jquery->semantic();
+        $table=$semantic->dataTable("tblSites", "models\Lienweb", $fav);
+        $table->setFields(["url"]);
+        $table->setCaption("listefav", "ajoutfav","modifav");
+        $table->addEditButton(true);
+        echo $table->compile($this->jquery);
+        echo  $th->jquery->compile();
+    }
+    
+    
 }
