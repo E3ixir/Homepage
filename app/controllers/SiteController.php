@@ -24,6 +24,7 @@ class SiteController extends ControllerBase{
         $bts->getOnClick("SiteController","#bt1",["attr"=>"data-ajax"]);
         $frm=$semantic->defaultLogin("frm2");
         $bts=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
+        $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
         $frm->setCaption("remember", "Se souvenir de moi.");
