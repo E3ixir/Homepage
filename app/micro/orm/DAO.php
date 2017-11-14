@@ -200,17 +200,20 @@ class DAO {
 			$condition=" WHERE " . $condition;
 		$query=self::$db->prepareAndExecute($tableName, $condition, $useCache);
 		Logger::log("getAll", "SELECT * FROM " . $tableName . $condition);
+
+		$members=OrmUtils::getAnnotationInfo($className, "#fieldNames");
 		foreach ( $query as $row ) {
-			$o=self::loadObjectFromRow($row, $className, $invertedJoinColumns, $oneToManyFields, $useCache);
+			$o=self::loadObjectFromRow($row, $className, $invertedJoinColumns, $oneToManyFields,$members, $useCache);
 			$objects[]=$o;
 		}
 		return $objects;
 	}
 
-	private static function loadObjectFromRow($row, $className, $invertedJoinColumns, $oneToManyFields, $useCache=NULL) {
+	private static function loadObjectFromRow($row, $className, $invertedJoinColumns, $oneToManyFields, $members,$useCache=NULL) {
 		$o=new $className();
 		foreach ( $row as $k => $v ) {
-			$accesseur="set" . ucfirst($k);
+			$field=\array_search($k, $members);
+			$accesseur="set" . ucfirst($field);
 			if (method_exists($o, $accesseur)) {
 				$o->$accesseur($v);
 			}
@@ -379,14 +382,23 @@ class DAO {
 
 	/**
 	 * Réalise la connexion à la base de données en utilisant les paramètres passés
+	 * @param string $dbType
 	 * @param string $dbName
 	 * @param string $serverName
 	 * @param string $port
 	 * @param string $user
 	 * @param string $password
 	 */
-	public static function connect($dbName, $serverName="127.0.0.1", $port="3306", $user="root", $password="", $cache=false) {
-		self::$db=new Database($dbName, $serverName, $port, $user, $password, $cache);
-		self::$db->connect();
+	public static function connect($dbType,$dbName, $serverName="127.0.0.1", $port="3306", $user="root", $password="", $cache=false) {
+		self::$db=new Database($dbType,$dbName, $serverName, $port, $user, $password, $cache);
+		try {
+			self::$db->connect();
+		} catch (\Exception $e) {
+			Logger::error("DAO", $e->getMessage());
+		}
+	}
+
+	public static function isConnected(){
+		return self::$db!==null && (self::$db instanceof Database) && self::$db->isConnected();
 	}
 }

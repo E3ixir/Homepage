@@ -57,7 +57,7 @@ class ControllerAction {
 		$result=[];
 		$config=Startup::getConfig();
 
-		$files=CacheManager::getControllerFiles($config,true);
+		$files=CacheManager::getControllersFiles($config,true);
 		foreach ( $files as $file ) {
 			if (is_file($file)) {
 				$controllerClass=ClassUtils::getClassFullNameFromFile($file);
@@ -139,5 +139,9 @@ class ControllerAction {
 	public function getPath(){
 		$reflect=new \ReflectionClass($this->controller);
 		return $reflect->getShortName()."/".$this->action;
+	}
+
+	public function getId(){
+		return $this->getPath();
 	}
 }

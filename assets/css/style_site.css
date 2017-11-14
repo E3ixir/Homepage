@@ -118,18 +118,19 @@
 
 	    #bt1
 	    {	
-	    	text-align: left;
+	    	margin-left: 190px;
 	    }
 
 	    #bt2
 	    {
-	    	text-align: right;
+	    	margin-left: 1300px;
+	    	height: 20px;
 	    	
 	    }
 
 	    #bt3
 	    {
-	    	text-align: right;
+	    	margin-left: 1300px;
 	 
 	    }
 

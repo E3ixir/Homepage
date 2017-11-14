@@ -20,6 +20,9 @@ use Ajax\semantic\html\base\HtmlSemDoubleElement;
 use Ajax\semantic\widgets\dataelement\DataElement;
 use Ajax\semantic\html\elements\HtmlButton;
 use Ajax\semantic\html\elements\html5\HtmlLink;
+use Ajax\semantic\html\elements\HtmlButtonGroups;
+use Ajax\semantic\widgets\datatable\DataTable;
+use Ajax\service\JString;
 
 /**
  * @author jc
@@ -56,7 +59,7 @@ class UbiquityMyAdminViewer {
 		$fieldTypes=OrmUtils::getFieldTypes($className);
 		foreach ($fieldTypes as $property=>$type){
 			switch ($type){
-			case "boolean": case "bool":
+			case "tinyint(1)":
 				$form->fieldAsCheckbox($property);
 				break;
 			case "int": case "integer":
@@ -142,6 +145,7 @@ class UbiquityMyAdminViewer {
 
 	public function getRoutesDataTable($routes){
 		$dt=$this->jquery->semantic()->dataTable("dtRoutes", "micro\controllers\admin\popo\Route", $routes);
+		$dt->setIdentifierFunction(function($i,$instance){return $instance->getId();});
 		$dt->setFields(["path","methods","controller","action","parameters","cache","duration","name","expired"]);
 		$dt->setCaptions(["Path","Methods","Controller","Action","Parameters","Cache","Duration","Name","Expired",""]);
 		$dt->fieldAsLabel("path","car");
@@ -169,8 +173,7 @@ class UbiquityMyAdminViewer {
 			$dTable->setColAlignment(6, TextAlignment::RIGHT);
 			$dTable->setColAlignment(8, TextAlignment::CENTER);
 		});
-		$dt->addFieldButton("Get",true,function(&$bt,$instance){$bt->addClass("_get")->setProperty("data-url",$instance->getPath());});
-		$dt->insertInFieldButton(9,"Post",true,function(&$bt,$instance){$bt->addClass("_post")->setProperty("data-url",$instance->getPath());});
+		$this->addGetPostButtons($dt);
 		$dt->setActiveRowSelector("warning");
 		return $dt;
 	}
@@ -180,9 +183,10 @@ class UbiquityMyAdminViewer {
 		$dt->setFields(["controller","action","dValues"]);
 		$dt->setIdentifierFunction(function($i,$instance){return \urlencode($instance->getController());});
 		$dt->setCaptions(["Controller","Action [routes]","Default values",""]);
+		$this->addGetPostButtons($dt);
 		$dt->setValueFunction("controller", function($v,$instance,$index){
 			$bt=new HtmlButton("bt-".\urlencode($v),$v);
-			$bt->setSize("large");
+			$bt->addClass("large _clickFirst");
 			$bt->addIcon("heartbeat",true,true);
 			$bt->setToggle();
 			$bt->onClick("$(\"tr[data-ajax='".\urlencode($instance->getController())."'] td:not([rowspan])\").toggle(!$(this).hasClass('active'));");
@@ -210,9 +214,18 @@ class UbiquityMyAdminViewer {
 		});
 		$dt->setEdition(true);
 		$dt->addClass("compact");
-		$dt->addFieldButton("Get",true,function(&$bt,$instance){$bt->addClass("_get")->setProperty("data-url",$instance->getPath());});
-		$dt->insertInFieldButton(3,"Post",true,function(&$bt,$instance){$bt->addClass("_post")->setProperty("data-url",$instance->getPath());});
 		return $dt;
+	}
+
+	protected function addGetPostButtons(DataTable $dt){
+		$dt->addFieldButtons(["GET","POST"],true,function(HtmlButtonGroups $bts,$instance,$index){
+			$path=$instance->getPath();
+			$bts->setIdentifier("bts-".$instance->getId()."-".$index);
+			$bts->getItem(0)->addClass("_get")->setProperty("data-url",$path);
+			$bts->getItem(1)->addClass("_post")->setProperty("data-url",$path);
+			$item=$bts->addDropdown(["Post with parameters..."])->getItem(0);
+			$item->addClass("_postWithParams")->setProperty("data-url",$path);
+		});
 	}
 
 	public function getCacheDataTable($cacheFiles){
@@ -243,13 +256,15 @@ class UbiquityMyAdminViewer {
 			return self::formatBytes($v);
 		});
 		$dt->setValueFunction("name", function($name,$instance,$i){
-			$link=new HtmlLink("lnl-".$i);
-			$link->setContent($name);
-			$link->addIcon("edit");
-			$link->addClass("_lnk");
-			$link->setProperty("data-type", $instance->getType());
-			$link->setProperty("data-ajax", $instance->getFile());
-			return $link;
+			if(JString::isNotNull($name)){
+				$link=new HtmlLink("lnl-".$i);
+				$link->setContent($name);
+				$link->addIcon("edit");
+				$link->addClass("_lnk");
+				$link->setProperty("data-type", $instance->getType());
+				$link->setProperty("data-ajax", $instance->getFile());
+				return $link;
+			}
 		});
 		$dt->onPreCompile(function($dt){
 			$dt->getHtmlComponent()->mergeIdentiqualValues(0);
@@ -284,8 +299,8 @@ class UbiquityMyAdminViewer {
 		$de->setCaptions($fields);
 		$de->setValueFunction("database", function($v,$instance,$index){
 			$dbDe=new DataElement("",$v);
-			$dbDe->setFields(["dbName","serverName","port","user","password","cache"]);
-			$dbDe->setCaptions(["dbName","serverName","port","user","password","cache"]);
+			$dbDe->setFields(["type","dbName","serverName","port","user","password","cache"]);
+			$dbDe->setCaptions(["Type","dbName","serverName","port","user","password","cache"]);
 			return $dbDe;
 		});
 		$de->setValueFunction("templateEngineOptions", function($v,$instance,$index){
