@@ -39,6 +39,7 @@ class SiteController extends ControllerBase{
         echo $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
     }
+    
     /**
      * @route("/all","cache"=>true,"duration"=>15)
      */
