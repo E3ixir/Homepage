@@ -2,11 +2,14 @@
 namespace controllers;
 use Ajax\JsUtils;
 use micro\orm\DAO;
+use models\Lienweb;
 use models\Site;
 use micro\utils\RequestUtils;
 use models;
 use Ajax\semantic\html\collections\form\HtmlFormInput;
 use Ajax\semantic\widgets\business\user\FormLogin;
+use Ajax\semantic\widgets\dataform\DataForm;
+use Ajax\bootstrap\html\HtmlForm;
  
 /**
  * Controller SiteController
@@ -19,8 +22,8 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Modification des favoris"]);
-        $bts->setPropertyValues("data-ajax",["printLien/", ""]);
+        $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris"]);
+        $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/"]);
         $bts->getOnClick("SiteController","#bt1",["attr"=>"data-ajax"]);
         $frm=$semantic->defaultLogin("frm2");
         $bts=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
@@ -36,6 +39,7 @@ class SiteController extends ControllerBase{
         $bt->addIcon("sign in");        
         echo $frm->asModal();        
         $this->jquery->exec("$('#modal-connect').modal('show');",true);
+        
         echo $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
     }
@@ -49,35 +53,29 @@ class SiteController extends ControllerBase{
         $table=$semantic->dataTable("tblSites", "models\Site", $users);
         $table->setFields(["id","nom","longitude"]);
         $table->setCaptions(["ID","Nom","Longitude","Actions"]);
-        $table->addEditDeleteButtons(false);
+        $table->addDeleteButton(false);
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
     }
     
-    /**
-    *@route("menu/")
-    */
-    public function menu(){
-        $menu=$semantic->htmlMenu("menu8");
-        $menu->addMenuAsItem(["Enterprise","Consumer"],"Products");
-        $menu->addMenuAsItem(["Rails","Python","PHP"],"CMS solutions");
-        $menu->setVertical();
-        echo $menu;
-    }
-    
-    private $idUser = 2;
     
     /**
      * @route("/liensweb")
      */
     public function printLien(){
+        $links=DAO::getAll("models\Lienweb");
+        
         $semantic=$this->jquery->semantic();
-        $liens=DAO::getAll("models\Lienweb","idUtilisateur=".$this->idUser);
-        $table=$semantic->dataTable("tblLiens", "models\Lienweb", $liens);
-        $table->setIdentifierFunction(function($i,$obj){return $obj->getId();});
-        $table->setFields(["id","libelle","url"]);
-        $table->setCaptions(["ID","Nom","URL","Actions"]);
-        $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
+        
+        $table=$semantic->dataTable("tblLinks", "models\Lienweb", $links);
+        
+        $table->setIdentifierFunction(function($i,$o){return $o->getId();});
+        $table->setFields(["libelle","url"]);
+        $table->setCaptions(["Site","URL"]);
+        
+        $table->addEditButton(false);
+        $table->addDeleteButton(false);
+        $table->setUrls(["edit"=>"SiteController/modiffav","delete"=>"SiteController/delete"]);
         $table->setTargetSelector("#bt1");
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
@@ -88,11 +86,75 @@ class SiteController extends ControllerBase{
         session_destroy();
     }
     
-    public function ajoutfav(){
-        $form=$semantic->htmlForm("frm2");
-        $form->addItem(new HtmlFormInput("ui","User input"));
-        echo $form;
+    private function _ajoutfav(){
+        $semantic=$this->jquery->semantic();
+        
+        $link=new Lienweb();
+        $link->idSite="";
+        
+        $form=$semantic->dataForm("frm3", $link);
+        
+        $form->setFields(["libelle\n","url","ordre","submit"]);
+        $form->setCaptions(["Site internet","URL","Ordre","Valider"]);
+        
+        $form->fieldAsSubmit("submit","blue","SiteController/new","#bt1");
     }
     
+    public function ajoutfav() {
+        $this->_ajoutfav();
+        $this->jquery->compile($this->view);
+        $this->loadView("sites/add.html");
+    }
     
+    public function new() {
+        $semantic=$this->jquery->semantic();
+        $link=new Lienweb();
+        
+        RequestUtils::setValuesToObject($link,$_POST);
+        
+        
+        if(DAO::insert($link)){
+            echo $semantic->htmlMessage("#bt1",$link->getLibelle()." ajout&eacute;");
+        }
+    }
+    
+    private function _modiffav($id){
+        $semantic=$this->jquery->semantic();
+        
+        $fav=DAO::getOne("models\Lienweb", $id);
+        
+        $form=$semantic->dataForm("frm3", $fav);
+        
+        $form->setFields(["id","libelle","url","submit"]);
+        $form->setCaptions(["id","Libelle","URL","Valider"]);
+        $form->fieldAsHidden("id");
+        $form->fieldAsSubmit("submit","yellow","SiteController/updatefav","#bt1");
+    }
+    
+    public function modiffav($id){
+        $this->_modiffav($id);
+        $this->jquery->compile($this->view);
+        $this->loadView("sites/editfav.html");
+    }
+    
+    public function updatefav(){
+            $semantic=$this->jquery->semantic();
+            $liens = DAO::getOne("models\Lienweb", $_POST["id"]);
+            RequestUtils::setValuesToObject($liens,$_POST);
+            
+            if(DAO::update($liens)) {
+                echo $semantic->htmlMessage("#bt1",$liens->getLibelle()." modifi&eacute;");
+            }
+            
+    }
+    
+    public function delete($id) {
+        $semantic=$this->jquery->semantic();
+        $link = DAO::getOne("models\Lienweb",$id );
+        
+        if(DAO::remove($link)) {
+            echo $semantic->htmlMessage("#bt1",$link->getLibelle()." supprim&eacute;");
+        }
+    }
+            
 }

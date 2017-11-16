@@ -13,7 +13,8 @@
     		<div class="bdr">
 	    		<form action="https://encrypted.google.com/search?hl=fr&amp;source=hp&amp;q=" id="myform">
 				<p><input id="barre" type="text" name="q" value="" /></p>
-			</div>
+                
+            </div>
 		    <div class="mdr">
 		       <nav> 
 			        <ul>
@@ -28,21 +29,28 @@
 				    	</li>
 			    	</ul>
 			    </nav>
-		    	</form>
-		    </div>
-    	</div>
-    	<br>
-    	<br>
-    	<div id="bt1">
-            {{q["button-1"] | raw}} 
-		</div>
+                </form>
+            </div>
+            <br>
+		    <div id="bt1">
+                {{q["button-1"] | raw}}
+            </div>
 
-        <div id="bt2">
-        {{q["button-2"] | raw}}
+            <div id="bt2">
+                {{q["button-2"] | raw}}
+            </div>
+
+            <br>
+
+            <div id="bt3">
+        	   {{q["button-3"] | raw}}
+            </div>
+
+            <br>
+
+            <div id="form">
+            </div>
         </div>
-        <br>
-        <div id="bt3">
-        	{{q["button-3"] | raw}}
-        </div>
+    </div>
     </body>
 </html>
