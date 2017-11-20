@@ -70,13 +70,13 @@ class SiteController extends ControllerBase{
         $table=$semantic->dataTable("tblLinks", "models\Lienweb", $links);
         
         $table->setIdentifierFunction(function($i,$o){return $o->getId();});
-        $table->setFields(["libelle","url"]);
-        $table->setCaptions(["Site","URL"]);
+        $table->setFields(["libelle","url","ordre"]);
+        $table->setCaptions(["Site","URL","Ordre"]);
         
         $table->addEditButton(false);
         $table->addDeleteButton(false);
         $table->setUrls(["edit"=>"SiteController/modiffav","delete"=>"SiteController/delete"]);
-        $table->setTargetSelector("#action-site");
+        $table->setTargetSelector("#list-site");
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
     }
@@ -97,7 +97,7 @@ class SiteController extends ControllerBase{
         $form->setFields(["libelle\n","url","ordre","submit"]);
         $form->setCaptions(["Site internet","URL","Ordre","Valider"]);
         
-        $form->fieldAsSubmit("submit","blue","SiteController/new","#bt1");
+        $form->fieldAsSubmit("submit","blue","SiteController/new","#list-site");
     }
     
     public function ajoutfav() {
@@ -114,7 +114,7 @@ class SiteController extends ControllerBase{
         
         
         if(DAO::insert($link)){
-            echo $semantic->htmlMessage("#bt1",$link->getLibelle()." ajout&eacute;");
+            echo $semantic->htmlMessage("#list-site",$link->getLibelle()." ajout&eacute;");
         }
     }
     
@@ -128,7 +128,7 @@ class SiteController extends ControllerBase{
         $form->setFields(["id","libelle","url","submit"]);
         $form->setCaptions(["id","Libelle","URL","Valider"]);
         $form->fieldAsHidden("id");
-        $form->fieldAsSubmit("submit","yellow","SiteController/updatefav","#bt1");
+        $form->fieldAsSubmit("submit","yellow","SiteController/updatefav","#list-site");
     }
     
     public function modiffav($id){
