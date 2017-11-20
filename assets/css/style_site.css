@@ -44,11 +44,11 @@
 
 	    #barre
 	    {
-	    	width: 245%;
+	    	width: 220%;
 	    	height: 40px;
 	    	font-size: 150%;
 	    	border-radius: 6px;
-
+	    	margin-left: 25px;
 	    }
 
 	    input
@@ -121,13 +121,13 @@
 	    #container-login
 	    {
 	   		 margin: auto;
-	  	     width: 900px;
+	  	     width: 800px;
 	    }
 
 	    #bt1
 	    {	
 	    	margin-top: 50px;
-	    	margin-left: 100px;
+	    	margin-left: 0;
 	    }
 
 	    
@@ -146,6 +146,19 @@
 	    	margin-top: 10px;
 	    }
 	    
+	    #frm3 label
+	    {
+	    	color:white;
+	    }
+
+	    /*détails du formulaire*/
+
+	    #frm3 button
+	    {
+	    	height: 50px;
+	    }
+
+
 	   
 
 

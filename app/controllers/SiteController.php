@@ -94,9 +94,11 @@ class SiteController extends ControllerBase{
         
         $form=$semantic->dataForm("frm3", $link);
         
-        $form->setFields(["libelle\n","url","ordre","submit"]);
+        $form->setFields(["libelle\n","url\n","ordre\n","submit"]);
         $form->setCaptions(["Site internet","URL","Ordre","Valider"]);
-        $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(5);}]);
+        $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(8);}]);
         
         $form->fieldAsSubmit("submit","blue","SiteController/new","#list-site");
     }
