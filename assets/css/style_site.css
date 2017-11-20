@@ -9,6 +9,7 @@
 
         .container1
 	    {
+	    	margin: auto;
 	    	margin-top: 50px;
 	    	width: 80%;
 	    	display: flex;
@@ -115,23 +116,33 @@
 	    }
 
 	    /*liste site et fav*/
+	    
+	    #container-login
+	    {
+	   		 margin: auto;
+	  	     width: 1000px;
+	    }
 
 	    #bt1
 	    {	
 	    	margin-top: 50px;
-	    	margin-left: 190px;
+	    	margin-left: 100px;
 	    }
 
-	    #bt2
+	    
+	    
+	    #buttons-login
 	    {
-	    	margin-right: 300px;
-	    	
-	
+	    	display: flex;
+	    	flex-direction: column;
+	    	float: right;
+	    	margin-right: 100px;
+	    	margin-top: -40px;
 	    }
-
+	    
 	    #bt3
 	    {
-	    	margin-right: 100px;
+	    	margin-top: 10px;
 	    }
 
 

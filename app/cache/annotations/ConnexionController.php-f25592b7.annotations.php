@@ -19,8 +19,5 @@ return array(
   'controllers\\ConnexionController::userRegister' => array(
     array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userRegister")
   ),
-  'controllers\\ConnexionController::userConnection' => array(
-    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userConnection")
-  ),
 );
 

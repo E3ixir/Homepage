@@ -22,8 +22,8 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris"]);
-        $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/"]);
+        $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
+        $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
         $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
         $frm=$semantic->defaultLogin("frm2");
         $bts=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
@@ -155,6 +155,10 @@ class SiteController extends ControllerBase{
         if(DAO::remove($link)) {
             echo $semantic->htmlMessage("#bt1",$link->getLibelle()." supprim&eacute;");
         }
+    }
+    
+    public function close(){
+        
     }
             
 }

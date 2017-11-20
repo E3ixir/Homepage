@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<base href="http://127.0.0.1/homepage/">
+<base href="http://localhost/homepage/">
 <meta charset="UTF-8">
 <title>homepage</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">

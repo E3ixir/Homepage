@@ -39,17 +39,6 @@ class ConnexionController extends ControllerBase
         }
     }
     
-    /**
-     * @route("/userConnection")
-     */
-    public function userConnection(){
-        $form=$semantic->htmlForm("frm1");
-        $form->addInput("firstname","First Name");
-        $form->addInput("lastname","Last Name");
-        $form->addCheckbox("ckAgree","I agree to the Terms and Conditions",NULL,"toggle");
-        $form->addButton("","Submit")->asSubmit();
-        echo $form;
-    }
 }
     
 ?>

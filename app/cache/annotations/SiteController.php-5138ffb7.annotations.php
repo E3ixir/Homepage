@@ -6,9 +6,11 @@ return array(
   'JsUtils' => 'Ajax\\JsUtils',
   'DAO' => 'micro\\orm\\DAO',
   'Site' => 'models\\Site',
+  'Utilisateur' => 'models\\Utilisateur',
   'RequestUtils' => 'micro\\utils\\RequestUtils',
   'models' => 'models',
   'HtmlFormInput' => 'Ajax\\semantic\\html\\collections\\form\\HtmlFormInput',
+  'FormLogin' => 'Ajax\\semantic\\widgets\\business\\user\\FormLogin',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\SiteController' => 
@@ -26,6 +28,15 @@ return array(
   ),
   'controllers\\SiteController::menu' => array(
     array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "menu/")
+  ),
+  'controllers\\SiteController::printLien' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/liensweb")
+  ),
+  'controllers\\SiteController::disconnected' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/disconnected")
+  ),
+  'controllers\\SiteController::userConnected' => array(
+    array('#name' => 'route', '#type' => 'micro\\annotations\\router\\RouteAnnotation', "/userConnected")
   ),
 );
 

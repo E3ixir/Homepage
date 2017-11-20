@@ -1,10 +1,10 @@
 <?php
 return array(
-		"siteUrl"=>"http://127.0.0.1/homepage/",
+		"siteUrl"=>"http://localhost/homepage/",
 		"database"=>[
 		        "type"=>"mysql",
 				"dbName"=>"homepage",
-				"serverName"=>"127.0.0.1",
+				"serverName"=>"localhost",
 				"port"=>"3306",
 				"user"=>"root",
 				"password"=>"",
