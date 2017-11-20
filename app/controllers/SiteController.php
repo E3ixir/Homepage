@@ -24,7 +24,7 @@ class SiteController extends ControllerBase{
         $semantic=$this->jquery->semantic();
         $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris"]);
         $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/"]);
-        $bts->getOnClick("SiteController","#bt1",["attr"=>"data-ajax"]);
+        $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
         $frm=$semantic->defaultLogin("frm2");
         $bts=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
         $frm=$semantic->defaultLogin("frm1");
@@ -103,7 +103,7 @@ class SiteController extends ControllerBase{
     public function ajoutfav() {
         $this->_ajoutfav();
         $this->jquery->compile($this->view);
-        $this->loadView("sites/add.html");
+        $this->loadView("sites/editfav.html");
     }
     
     public function new() {

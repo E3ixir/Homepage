@@ -43,7 +43,7 @@
 
 	    #barre
 	    {
-	    	width: 240%;
+	    	width: 245%;
 	    	height: 40px;
 	    	font-size: 150%;
 
@@ -118,19 +118,20 @@
 
 	    #bt1
 	    {	
-	    	
+	    	margin-top: 50px;
+	    	margin-left: 190px;
 	    }
 
 	    #bt2
 	    {
+	    	margin-right: 300px;
 	    	
-	    
-	    	
+	
 	    }
 
 	    #bt3
 	    {
-	 
+	    	margin-right: 100px;
 	    }
 
 
