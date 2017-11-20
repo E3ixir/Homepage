@@ -96,7 +96,7 @@ class SiteController extends ControllerBase{
         
         $form->setFields(["libelle\n","url","ordre","submit"]);
         $form->setCaptions(["Site internet","URL","Ordre","Valider"]);
-       
+        $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(5);}]);
         
         $form->fieldAsSubmit("submit","blue","SiteController/new","#list-site");
     }
