@@ -76,7 +76,7 @@ class SiteController extends ControllerBase{
         $table->addEditButton(false);
         $table->addDeleteButton(false);
         $table->setUrls(["edit"=>"SiteController/modiffav","delete"=>"SiteController/delete"]);
-        $table->setTargetSelector("#bt1");
+        $table->setTargetSelector("#action-site");
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
     }
