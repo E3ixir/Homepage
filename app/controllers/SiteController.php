@@ -32,8 +32,8 @@ class SiteController extends ControllerBase{
         $frm->setCaption("login", "Pseudo");
         $frm->setCaption("password", "Mot de passe");
         $frm->fieldAsSubmit("submit","green fluide","SiteController/connected","#frm1-submit");
-        $bt=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
-        $bt->addIcon("sign in");  
+        $btCo=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
+        $btCo->addIcon("sign in");
         
         $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
         $bt_deco->setProperty("data-ajax","button-3");
@@ -52,17 +52,20 @@ class SiteController extends ControllerBase{
         if(isset($user)){
             if($user->getPassword()===$_POST['password']){
                 $_SESSION["user"]=$user;
-                echo "Bienvenue ".$user->getLogin();
+                $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
+                $messCo->setDismissable();
+                echo $messCo->compile($this->jquery);
+                echo $this->jquery->compile();
                 $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
                 $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
                 $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
                 echo $bts->compile($this->jquery);
                 echo $this->jquery->compile();
             } else {
-                echo "erreur";
+                echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
             }
         } else {
-            echo "erreur";
+            echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
         }
     }
     
