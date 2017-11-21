@@ -22,11 +22,8 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
-        $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
-        $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
+       
         $frm=$semantic->defaultLogin("frm2");
-        $bts=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
@@ -34,9 +31,14 @@ class SiteController extends ControllerBase{
         $frm->setCaption("submit", "Connexion");
         $frm->setCaption("login", "Pseudo");
         $frm->setCaption("password", "Mot de passe");
-        $frm->fieldAsSubmit("submit","green fluide","sTest/dePost","#frm1-submit");
+        $frm->fieldAsSubmit("submit","green fluide","SiteController/connected","#frm1-submit");
         $bt=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
-        $bt->addIcon("sign in");        
+        $bt->addIcon("sign in");  
+        
+        $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
+        $bt_deco->setProperty("data-ajax","button-3");
+        $bt_deco->getOnClick("disconnected/","",["attr"=>"data-ajax"]);
+       
         echo $frm->asModal();        
         $this->jquery->exec("$('#modal-connect').modal('show');",true);
         
@@ -44,18 +46,29 @@ class SiteController extends ControllerBase{
         $this->loadView("sites/index.html");
     }
     
-    /**
-     * @route("/all","cache"=>true,"duration"=>15)
-     */
-    public function all(){
-        $users=DAO::getAll("models\Site");
+    public function connected(){
         $semantic=$this->jquery->semantic();
-        $table=$semantic->dataTable("tblSites", "models\Site", $users);
-        $table->setFields(["id","nom","longitude"]);
-        $table->setCaptions(["ID","Nom","Longitude","Actions"]);
-        $table->addDeleteButton(false);
-        echo $table->compile($this->jquery);
-        echo $this->jquery->compile();
+        $user=DAO::getOne("models\Utilisateur","login='".$_POST['login']."'");
+        if(isset($user)){
+            if($user->getPassword()===$_POST['password']){
+                $_SESSION["user"]=$user;
+                echo "Bienvenue ".$user->getLogin();
+                $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
+                $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
+                $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
+                echo $bts->compile($this->jquery);
+                echo $this->jquery->compile();
+            } else {
+                echo "erreur";
+            }
+        } else {
+            echo "erreur";
+        }
+    }
+    
+    public function disconnected(){
+        session_unset();
+        session_destroy();
     }
     
     
@@ -79,11 +92,6 @@ class SiteController extends ControllerBase{
         $table->setTargetSelector("#list-site");
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
-    }
-    
-    public function disconnected(){
-        session_unset();
-        session_destroy();
     }
     
     private function _ajoutfav(){
