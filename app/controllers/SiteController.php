@@ -138,6 +138,7 @@ class SiteController extends ControllerBase{
         $link=new Lienweb();
         $user=$_SESSION["user"];
         
+        
         RequestUtils::setValuesToObject($link,$_POST);
         
         $select_user=DAO::getOne("models\Utilisateur", $user->getId());
