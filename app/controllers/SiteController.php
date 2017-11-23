@@ -65,6 +65,7 @@ class SiteController extends ControllerBase{
                 $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
                 $messCo->setDismissable();
                 echo $messCo->compile($this->jquery);
+                $this->jquery->get("SiteController/index", "body");
                 echo $this->jquery->compile();
                 
             } else {
@@ -73,15 +74,14 @@ class SiteController extends ControllerBase{
         } else {
             echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
         }
-        $this->jquery->get("SiteController/index", "#frm1-submit");
-        
+       
     }
     
     public function disconnected(){
-        session_unset();
-        session_destroy();
         $this->jquery->get("SiteController/index", "body");
         echo $this->jquery->compile();
+        session_unset();
+        session_destroy();
     }
     
     
