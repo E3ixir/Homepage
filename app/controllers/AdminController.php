@@ -58,9 +58,9 @@ class AdminController extends ControllerBase{
         $semantic->setLanguage("fr");
         $form=$semantic->dataForm("frmSite", $site);
         $form->setValidationParams(["on"=>"blur", "inline"=>true]);
-        $form->setFields(["nom\n","latitude","longitude","ecart\n","fondEcran","couleur\n","ordre","options","submit"]);
+        $form->setFields(["nom\n","latitude","longitude","ecart\n","fondEcran\n","couleur\n","ordre\n","options\n","submit"]);
         $form->setCaptions(["Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options","Valider"]);
-        $form->fieldAsSubmit("submit","green",$action,"#divSites");
+        $form->fieldAsSubmit("submit","blue",$action,"#divSites");
         /*$this->jquery->click("#map","
          console.log(event);
          var latlong = event.latLng;
