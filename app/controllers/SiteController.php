@@ -22,8 +22,7 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-       
-        $frm=$semantic->defaultLogin("frm2");
+        /*Affichage du formulaire de co*/
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
@@ -32,7 +31,7 @@ class SiteController extends ControllerBase{
         $frm->setCaption("login", "Pseudo");
         $frm->setCaption("password", "Mot de passe");
         $frm->fieldAsSubmit("submit","green fluide","SiteController/connected","#frm1-submit");
-        
+
         if(!isset($_SESSION['user'])){
             $btCo=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
             $btCo->addIcon("sign in");
@@ -63,14 +62,12 @@ class SiteController extends ControllerBase{
             if($user->getPassword()===$_POST['password']){
                 $_SESSION["user"]=$user;
                 $this->jquery->get("SiteController/index", "body");
-                $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
-                $messCo->setDismissable();
-                echo $messCo->compile($this->jquery);
+
             } else {
-                echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
+                echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.","red");
             }
         } else {
-            echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
+            echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.","red");
         }
         echo $this->jquery->compile($this->view);
     }
@@ -87,6 +84,7 @@ class SiteController extends ControllerBase{
      * @route("/liensweb")
      */
     public function printLien(){
+
         $links=DAO::getAll("models\Lienweb");
         
         $semantic=$this->jquery->semantic();
@@ -182,5 +180,7 @@ class SiteController extends ControllerBase{
     public function close(){
         
     }
+
+
             
 }

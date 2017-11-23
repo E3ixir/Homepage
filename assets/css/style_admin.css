@@ -1,0 +1,14 @@
+    body
+    {
+        background: url(../images/img5.png) no-repeat;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        font-family: sans-serif;
+    }
+
+    label
+    {
+        color:white;
+    }
+
