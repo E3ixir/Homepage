@@ -41,8 +41,8 @@ class SiteController extends ControllerBase{
             $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
 
             $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
-             $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
-             $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
+            $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
+            $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
              
              
         }
@@ -75,6 +75,7 @@ class SiteController extends ControllerBase{
     public function disconnected(){
         session_unset();
         session_destroy();
+
         $this->jquery->get("SiteController/index", "body");
         echo $this->jquery->compile($this->view);
     }
@@ -99,6 +100,7 @@ class SiteController extends ControllerBase{
         $table->addDeleteButton(false);
         $table->setUrls(["edit"=>"SiteController/modiffav","delete"=>"SiteController/delete"]);
         $table->setTargetSelector("#list-site");
+
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
     }
