@@ -39,7 +39,7 @@ class SiteController extends ControllerBase{
         } else {
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->setProperty("data-ajax","button-3");
-            $bt_deco->getOnClick("SiteController/disconnected","",["attr"=>"data-ajax"]);
+            $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
 
             $bts=$semantic->htmlButtonGroups("button-1",["Liste des favoris","Ajout d'un favoris","Fermer"]);
              $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
@@ -62,27 +62,24 @@ class SiteController extends ControllerBase{
         if(isset($user)){
             if($user->getPassword()===$_POST['password']){
                 $_SESSION["user"]=$user;
+                $this->jquery->get("SiteController/index", "body");
                 $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
                 $messCo->setDismissable();
                 echo $messCo->compile($this->jquery);
-                
-                
             } else {
                 echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
             }
         } else {
             echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
         }
-        $this->jquery->get("SiteController/index", "body");
-        echo $this->jquery->compile();
+        echo $this->jquery->compile($this->view);
     }
     
     public function disconnected(){
-        $semantic=$this->jquery->semantic();
-        $this->jquery->get("SiteController/index", "body");
-        echo $this->jquery->compile();
         session_unset();
         session_destroy();
+        $this->jquery->get("SiteController/index", "body");
+        echo $this->jquery->compile($this->view);
     }
     
     
