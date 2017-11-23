@@ -117,14 +117,12 @@ class SiteController extends ControllerBase{
         $link=new Lienweb();
         
         $form=$semantic->dataForm("frm3", $link);
-        $user=$_SESSION["user"];
         
-        $form->setFields(["libelle\n","url\n","ordre\n","idUtilisateur","submit"]);
+        $form->setFields(["libelle\n","url\n","ordre\n","submit"]);
         $form->setCaptions(["Site internet","URL","Ordre","Valider"]);
         $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(8);}]);
-        $form->fieldAsHidden(3,[$user->getId()=>"idUtilisateur"]);
         
         $form->fieldAsSubmit("submit","blue","SiteController/new","#list-site");
     }
@@ -138,9 +136,12 @@ class SiteController extends ControllerBase{
     public function new() {
         $semantic=$this->jquery->semantic();
         $link=new Lienweb();
+        $user=$_SESSION["user"];
         
         RequestUtils::setValuesToObject($link,$_POST);
         
+        $select_user=DAO::getOne("models\Utilisateur", $user->getId());
+        $link->setUtilisateur($select_user);
         
         if(DAO::insert($link)){
             echo $semantic->htmlMessage("#list-site",$link->getLibelle()." ajout&eacute;");
