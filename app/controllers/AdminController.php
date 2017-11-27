@@ -17,9 +17,9 @@ class AdminController extends ControllerBase{
     public function index(){
 
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("bts",["Liste des sites","Ajout d'un site"]);
-        $bts->setPropertyValues("data-ajax", ["all/","addSite/"]);
-        $bts->getOnClick("AdminController/","#divSites",["attr"=>"data-ajax"]);
+        $bts=$semantic->htmlButtonGroups("bts",["Liste des sites","Ajout d'un site","Reinitialiser"]);
+        $bts->setPropertyValues("data-ajax", ["all/","addSite/","close/"]);
+        $bts->getOnClick("AdminController/","#divSites",["attr"=>"data-ajax",]);
         $this->jquery->compile($this->view);
         $this->loadView("Admin\index.html");
         //$this->loadView("sites\index.html",["jsMap"=>$this->_generateMap(49.201491, -0.380734)]);
@@ -145,8 +145,9 @@ class AdminController extends ControllerBase{
 
     private function _generateMap($lat,$long){
         return "
-        <script>
-             var map;
+      <script>
+
+                var map;
                 var markers = [];
 
                 function initMap() {
@@ -161,8 +162,8 @@ class AdminController extends ControllerBase{
                     /*On appelle le listener addMarker quand il y a un clique*/
                     map.addListener('click', function(event) {
                         addMarker(event.latLng);
-                        document.getElementById('lat').value=event.latLng.lat();
-                        document.getElementById('lng').value=event.latLng.lng();
+                        document.getElementById('frmSite-latitude-0').value=event.latLng.lat();
+                        document.getElementById('frmSite-longitude-0').value=event.latLng.lng();
 
                     });
 
@@ -185,9 +186,12 @@ class AdminController extends ControllerBase{
                         markers[i].setMap(map);
                     }
                 }
-                
-            </script>
+        </script>
         <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDxz9dHENw-b-1TlNXw88v3rWtKqCEb2HM&callback=initMap'></script>
         ";
+    }
+
+    public function close(){
+
     }
 }
