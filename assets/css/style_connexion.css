@@ -125,3 +125,18 @@ body
             left : 105%;
             margin-left : -340px;
         }
+
+        .boiteco input[type="button"]
+        {
+            border: none;
+            outline: none;
+            height: 40px;
+            color: white;
+            background: #262626;
+            cursor: pointer;
+        }
+
+        .boiteco input[type="button"]:hover
+        {
+            background: #40A497;
+        }

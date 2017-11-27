@@ -156,8 +156,8 @@ class SiteController extends ControllerBase{
         
         $form=$semantic->dataForm("frm3", $fav);
         
-        $form->setFields(["id","libelle","url","submit"]);
-        $form->setCaptions(["id","Libelle","URL","Valider"]);
+        $form->setFields(["id","libelle","url","ordre","submit"]);
+        $form->setCaptions(["id","Libelle","URL","Ordre","Valider"]);
         $form->fieldAsHidden("id");
         $form->fieldAsSubmit("submit","yellow","SiteController/updatefav","#list-site");
     }
