@@ -49,8 +49,7 @@ class SiteController extends ControllerBase{
             $bts=$semantic->htmlButtonGroups("button-1",["Liste de vos favoris","Ajouter un favoris","Fermer"]);
              $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
              $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
-             
-             
+            
         }
         
         echo $frm->asModal();        
