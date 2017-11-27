@@ -60,6 +60,14 @@ class AdminController extends ControllerBase{
         $form->setValidationParams(["on"=>"blur", "inline"=>true]);
         $form->setFields(["nom\n","latitude","longitude","ecart\n","fondEcran\n","couleur\n","ordre\n","options\n","submit"]);
         $form->setCaptions(["Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options","Valider"]);
+        $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(3);}]);
+        $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(3);}]);
+        $form->fieldAsInput(3,["jsCallback"=>function($input){$input->setWidth(2);}]);
+        $form->fieldAsInput(4,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(5,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(6,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(7,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsSubmit("submit","blue",$action,"#divSites");
         /*$this->jquery->click("#map","
          console.log(event);
@@ -138,29 +146,47 @@ class AdminController extends ControllerBase{
     private function _generateMap($lat,$long){
         return "
         <script>
-            var map={};
-            function initMap() {
-                var optionsMap = {
-					zoom: 17,
-					center: {lat: {$lat}, lng: {$long}},
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				}
-                map = new google.maps.Map(document.getElementById('map'), optionsMap);
-                var optionsCercle = {
-					map: map,
-					center: map.getCenter(),
-					radius: 200
-				}
-				var cercle = new google.maps.Circle(optionsCercle);
-                map.addListener('click',function(event){
-                    document.getElementById('frmSite-latitude').value=event.latLng.lat();
-                    document.getElementById('frmSite-longitude').value=event.latLng.lng();
-                })
-                frmSite-latitude.addListener('change', function(event){
-                    event.target.value=map.latLng.lat();
-                })
-            }
-        </script>
+             var map;
+                var markers = [];
+
+                function initMap() {
+                    var Ursulette = {lat: 49.182863, lng: -0.370679};
+
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: Ursulette,
+                        mapTypeId: 'terrain'
+                    });
+
+                    /*On appelle le listener addMarker quand il y a un clique*/
+                    map.addListener('click', function(event) {
+                        addMarker(event.latLng);
+                        document.getElementById('lat').value=event.latLng.lat();
+                        document.getElementById('lng').value=event.latLng.lng();
+
+                    });
+
+                    /*Ajout du marqueur au centre de la map*/
+                    addMarker(Ursulette);
+                }
+
+                /*Ajout du marqueur dans l'array*/
+                function addMarker(location) {
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                    markers.push(marker);
+                }
+
+                /*Mise de tous les marqueurs dans l'array*/
+                function setMapOnAll(map) {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                }
+                
+            </script>
         <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDxz9dHENw-b-1TlNXw88v3rWtKqCEb2HM&callback=initMap'></script>
         ";
     }
