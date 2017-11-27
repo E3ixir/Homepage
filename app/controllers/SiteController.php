@@ -26,6 +26,8 @@ class SiteController extends ControllerBase{
         $frm=$semantic->defaultLogin("frm2");
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
+        $frm->removeField("remember");
+        $frm->removeField("forget");
         $frm->setCaption("forget", "Mot de passe oubli&eacute ?");
         $frm->setCaption("remember", "Se souvenir de moi.");
         $frm->setCaption("submit", "Connexion");
@@ -49,7 +51,7 @@ class SiteController extends ControllerBase{
             $bts=$semantic->htmlButtonGroups("button-1",["Liste de vos favoris","Ajouter un favoris","Fermer"]);
              $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
              $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
-            
+
         }
         
         echo $frm->asModal();        
@@ -71,10 +73,10 @@ class SiteController extends ControllerBase{
                 $messCo->setDismissable();
                 echo $messCo->compile($this->jquery);
             } else {
-                echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
+                echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.","red");
             }
         } else {
-            echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.");
+            echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.","red");
         }
         echo $this->jquery->compile($this->view);
     }
