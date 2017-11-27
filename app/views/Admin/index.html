@@ -9,13 +9,14 @@
         <div class="container1">
             <div class='ui container'>
                 {{q['bts'] | raw}}
-            <div id='divSites'></div>
             </div>
-            <br>
-            <div id="map" style="width:300px;height:300px;"></div>
-            {{jsMap | raw}}
-            {{script_foot | raw}}
+            <div id="container-admin">
+           	    <div id='divSites'></div>
+                <div id="map" style="width:500px;height:300px;">{{jsMap | raw}}</div>
+            </div>	    
         </div>
+            {{script_foot | raw}}
+        
     <br>
     </body>
 </html>

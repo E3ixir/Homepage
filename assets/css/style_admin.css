@@ -17,8 +17,18 @@
         margin: auto;
         margin-top: 50px;
         width: 80%;
-        display: flex;
-        justify-content: space-around;
-
+        
+    }
+    
+    #container-admin
+    {
+    	display: flex;
+    	flex-direction: column;
+    	width: 100%;
+    	margin-top: 20px;;
     }
 
+	#map
+	{
+		float: left;
+	}

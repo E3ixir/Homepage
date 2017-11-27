@@ -40,6 +40,7 @@ class SiteController extends ControllerBase{
             $btCo->addIcon("sign in");
         } else {
             $user=$_SESSION["user"];
+            echo $user->getStatut();
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
             $messCo->setDismissable();
             $messCo->compile($this->jquery);
