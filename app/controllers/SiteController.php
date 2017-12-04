@@ -48,8 +48,8 @@ class SiteController extends ControllerBase{
             $bt_deco->setProperty("data-ajax","button-3");
             $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
 
-            $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Liste de vos favoris","Ajouter un favoris","Fermer"]);
-             $bts->setPropertyValues("data-ajax",["ProfilController/","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
+            $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Fond d'écran","Liste de vos favoris","Ajouter un favoris","Fermer"]);
+             $bts->setPropertyValues("data-ajax",["ProfilController/","EcranController/modifecran","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
              $bts->getOnClick("","#list-site",["attr"=>"data-ajax"]);
 
         }
