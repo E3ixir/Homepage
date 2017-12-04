@@ -40,7 +40,6 @@ class SiteController extends ControllerBase{
             $btCo->addIcon("sign in");
         } else {
             $user=$_SESSION["user"];
-            echo $user->getStatut();
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
             $messCo->setDismissable();
             $messCo->compile($this->jquery);
@@ -49,8 +48,8 @@ class SiteController extends ControllerBase{
             $bt_deco->setProperty("data-ajax","button-3");
             $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
 
-            $bts=$semantic->htmlButtonGroups("button-1",["Liste de vos favoris","Ajouter un favoris","Fermer"]);
-             $bts->setPropertyValues("data-ajax",["printLien/","ajoutfav/","close/"]);
+            $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Liste de vos favoris","Ajouter un favoris","Fermer"]);
+             $bts->setPropertyValues("data-ajax",["Detailperso","printLien/","ajoutfav/","close/"]);
              $bts->getOnClick("SiteController","#list-site",["attr"=>"data-ajax"]);
 
         }
