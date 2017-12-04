@@ -31,7 +31,7 @@ class ProfilController extends ControllerBase
         $form->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre","Valider"]);
 
 
-        $form->fieldAsSubmit("submit","blue","ProfilController/updateUser/".$id,"#msgUpdate");
+        $form->fieldAsSubmit("submit","orange","ProfilController/updateUser/".$id,"#msgUpdate");
     }
 
     public function printData(){

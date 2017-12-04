@@ -49,7 +49,7 @@ class SiteController extends ControllerBase{
             $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
 
             $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Liste de vos favoris","Ajouter un favoris","Fermer"]);
-             $bts->setPropertyValues("data-ajax",["ProfilController/","SiteController/printLien/","SiteController/ajoutfav/","close/"]);
+             $bts->setPropertyValues("data-ajax",["ProfilController/","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
              $bts->getOnClick("","#list-site",["attr"=>"data-ajax"]);
 
         }
@@ -125,7 +125,7 @@ class SiteController extends ControllerBase{
         $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(8);}]);
         
-        $form->fieldAsSubmit("submit","blue","SiteController/new","#list-site");
+        $form->fieldAsSubmit("submit","orange","SiteController/new","#list-site");
     }
     
     public function ajoutfav() {
