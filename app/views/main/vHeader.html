@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head>
-<base href="{{config["siteUrl"]}}">
-<meta charset="UTF-8">
-<title>homepage</title>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-<link rel="stylesheet" type="text/css" href="localhost/homepage/style.css">
-</head>
+    <html>
+        <head>
+        <base href="{{config["siteUrl"]}}">
+        <meta charset="UTF-8">
+            <title>homepage</title>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+            <style type="text/css">
+                body
+                {
+                    background: url('{{fond | raw }}') no-repeat;
+                    background-size: cover;
+                }
+            </style>
+        </head>
 <body>
