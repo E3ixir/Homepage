@@ -27,8 +27,8 @@ class ProfilController extends ControllerBase
         $user = DAO::getOne("models\Utilisateur",$id );
         $form=$semantic->dataForm("frmUser", $user);
 
-        $form->setFields(["login","password","elementsMasques","couleur","ordre","submit"]);
-        $form->setCaptions(["Login","Password","Elements Masqués","Couleur","Ordre","Valider"]);
+        $form->setFields(["login","password","elementsMasques","fondecran","couleur","ordre","submit"]);
+        $form->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre","Valider"]);
 
         $form->fieldAsSubmit("submit","orange","ProfilController/updateUser/".$id,"#msgUpdate");
     }
