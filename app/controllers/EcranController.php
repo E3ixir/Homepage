@@ -39,7 +39,7 @@ class EcranController extends ControllerBase
         $semantic=$this->jquery->semantic();
 
         $card=$semantic->htmlCard("card4");
-        $img=$card->addImage("localhost/homepage/assets/images/img4.png");
+        $img=$card->addImage("http://localhost/homepage/assets/images/img4.jpg");
         $img->addDimmer(["on"=>"hover","opacity"=>0.5],HtmlButton::labeled("bt4","add friend","plus"))->setBlurring();
         $card->addItemHeaderContent("Kristy","Joined in 2013","Kristy is an art director living in New York.");
         $card->addExtraContent("22 Friends")->addIcon("user");
@@ -48,7 +48,7 @@ class EcranController extends ControllerBase
         echo $this->jquery->compile();
 
         $card=$semantic->htmlCard("card5");
-        $img=$card->addImage("localhost/homepage/assets/images/img5.png");
+        $img=$card->addImage("http://localhost/homepage/assets/images/img5.png");
         $img->addDimmer(["on"=>"hover","opacity"=>0.5],HtmlButton::labeled("bt5","add friend","plus"))->setBlurring();
         $card->addItemHeaderContent("Kristy","Joined in 2013","Kristy is an art director living in New York.");
         $card->addExtraContent("22 Friends")->addIcon("user");
@@ -58,7 +58,7 @@ class EcranController extends ControllerBase
         echo $this->jquery->compile();
 
         $card=$semantic->htmlCard("card6");
-        $img=$card->addImage("localhost/homepage/assets/images/img6.jpg");
+        $img=$card->addImage("http://localhost/homepage/assets/images/img6.jpg");
         $img->addDimmer(["on"=>"hover","opacity"=>0.5],HtmlButton::labeled("bt6","add friend","plus"))->setBlurring();
         $card->addItemHeaderContent("Kristy","Joined in 2013","Kristy is an art director living in New York.");
         $card->addExtraContent("22 Friends")->addIcon("user");
