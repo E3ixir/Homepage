@@ -26,10 +26,11 @@ body
         {
             width: 70%;
             height: 610px;
-            background: #fff;
+            background-color: #fff;
             margin: 0 auto; 
             border: 2px solid #fff;
             box-shadow: 0 15px 40px rgba(0,0,0,.5);
+            border-radius: 5px;
         }
 
         .container .gauche
@@ -56,6 +57,7 @@ body
             -moz-box-sizing: border-box;
             -ms-box-sizing: border-box;
             -o-box-sizing: border-box;
+            background-color: #fff;
         }
 
         .boiteco
