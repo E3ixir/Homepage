@@ -17,15 +17,15 @@ class AdminController extends ControllerBase{
     public function index(){
 
         $semantic=$this->jquery->semantic();
-        $bts=$semantic->htmlButtonGroups("bts",["Liste des sites","Ajout d'un site","Reinitialiser"]);
-        $bts->setPropertyValues("data-ajax", ["all/","addSite/","close/"]);
+        $bts=$semantic->htmlButtonGroups("bts",["Liste des sites","Ajout d'un site","Liste des utilisateurs","Ajout d'un utilisateur","Reinitialiser"]);
+        $bts->setPropertyValues("data-ajax", ["allSite/","addSite/","allUti/","addUti","close/"]);
         $bts->getOnClick("AdminController/","#divSites",["attr"=>"data-ajax",]);
         $this->jquery->compile($this->view);
         $this->loadView("Admin\index.html");
         //$this->loadView("sites\index.html",["jsMap"=>$this->_generateMap(49.201491, -0.380734)]);
     }
 
-    private function tout(){
+    private function toutSite(){
 
         $sites=DAO::getAll("models\Site");
         $semantic=$this->jquery->semantic();
@@ -34,16 +34,39 @@ class AdminController extends ControllerBase{
         $table->setFields(["id","nom","latitude","longitude","ecart","fondEcran","couleur","ordre","options"]);
         $table->setCaptions(["Id","Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options", "Actions"]);
         $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
-        $table->setUrls(["","AdminController/edit","AdminController/delete"]);
+        $table->setUrls(["","AdminController/edit","AdminController/deletesite"]);
         $table->setTargetSelector("#divSites");
 
         echo $table->compile($this->jquery);
         echo $this->jquery->compile();
     }
 
-    public function all() {
+    public function allSite() {
 
-        $this->tout();
+        $this->toutsite();
+        $this->jquery->compile($this->view);
+        $this->loadView("Admin\index.html");
+    }
+
+    private function toutUti(){
+
+        $user=DAO::getAll("models\Utilisateur");
+        $semantic=$this->jquery->semantic();
+        $table=$semantic->dataTable("tblutilisateur", "models\Utilisateur", $user);
+        $table->setIdentifierFunction(function($i,$obj){return $obj->getId();});
+        $table->setFields(["login","password","elementsMasques","fondecran","couleur","ordre"]);
+        $table->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre"]);
+        $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
+        $table->setUrls(["","AdminController/edit","AdminController/deleteuti"]);
+        $table->setTargetSelector("#divSites");
+
+        echo $table->compile($this->jquery);
+        echo $this->jquery->compile();
+    }
+
+    public function allUti() {
+
+        $this->toututi();
         $this->jquery->compile($this->view);
         $this->loadView("Admin\index.html");
     }
@@ -52,7 +75,11 @@ class AdminController extends ControllerBase{
         $this->_form(new Site(),"AdminController/newSite/",49.201491,-0.380734);
     }
 
-    private function _form($site, $action,$lat,$long){
+    public function addUti(){
+        $this->_formi(new Utilisateur(),"AdminController/newUti/");
+    }
+
+    private function _form($site,$action,$lat,$long){
 
         $semantic=$this->jquery->semantic();
         $semantic->setLanguage("fr");
@@ -83,6 +110,28 @@ class AdminController extends ControllerBase{
         echo $this->jquery->compile();
     }
 
+    private function _formi($user,$action){
+
+        $semantic=$this->jquery->semantic();
+        $semantic->setLanguage("fr");
+        $form=$semantic->dataForm("frmSite", $user);
+        $form->setValidationParams(["on"=>"blur", "inline"=>true]);
+        $form->setFields(["login\n","password\n","fondEcran\n","Elements Masqués\n","Fond d'écran\n","Couleur\n","Ordre\n","submit"]);
+        $form->setCaptions(["Login","Password","Fond d'écran","Couleur", "Ordre", "Options","Valider"]);
+        $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(3);}]);
+        $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(3);}]);
+        $form->fieldAsInput(3,["jsCallback"=>function($input){$input->setWidth(2);}]);
+        $form->fieldAsInput(4,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(5,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(6,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsInput(7,["jsCallback"=>function($input){$input->setWidth(8);}]);
+        $form->fieldAsSubmit("submit","blue",$action,"#divSites");
+
+        echo $form->compile($this->jquery);
+        echo $this->jquery->compile();
+    }
+
     public function newSite(){
 
         $site=new Site();
@@ -92,17 +141,42 @@ class AdminController extends ControllerBase{
         }
     }
 
-    public function delete($id){
+    public function newUti(){
+
+        $user=new Utilisateur();
+        RequestUtils::setValuesToObject($user,$_POST);
+        if(DAO::insert($user)){
+            echo "L'utilisateur ".$user->getNom()." a bien été ajouté.";
+        }
+    }
+
+    public function deleteSite($id){
         //  if(RequestUtils::isPost())
         //{
         //echo " - ".$id." - ";
         $site=DAO::getOne("models\Site", $id);
         $site instanceof models\Site && DAO::remove($site);
-        $this->forward("controllers\AdminController","all");
-        //echo "le site {$site} a bien été supprimé";
+        $this->forward("controllers\AdminController","allSite");
+        //echo "le site {$site} a bien été supprimé.";
         /*if($site instanceof models\Site && DAO::remove($site))
          {
-         echo "le site {$site} a bien été supprimé";
+         echo "le site {$site} a bien été supprimé.";
+         }else{ echo "impossible a supp";}*/
+        //}
+        //else{echo "Vous n'êtes pas autorisé à vous rendre ici.";}
+    }
+
+    public function deleteUti($id){
+        //  if(RequestUtils::isPost())
+        //{
+        //echo " - ".$id." - ";
+        $user=DAO::getOne("models\Utilisateur", $id);
+        $user instanceof models\Site && DAO::remove($user);
+        $this->forward("controllers\AdminController","allUti");
+        //echo "l'utilisateur {$user} a bien été supprimé.";
+        /*if($site instanceof models\Site && DAO::remove($site))
+         {
+         echo "l'utilisateur {$user} a bien été supprimé.";
          }else{ echo "impossible a supp";}*/
         //}
         //else{echo "Vous n'êtes pas autorisé à vous rendre ici.";}
@@ -123,7 +197,7 @@ class AdminController extends ControllerBase{
          }*/
     }
 
-    public function edit($id){
+    public function editSite($id){
         //if($site=$this->_getSiteInGet()){
         $site=DAO::getOne("models\Site", $id);
         $this->_form($site,"AdminController/update/".$id,$site->getLatitude(),$site->getLongitude());
@@ -135,11 +209,20 @@ class AdminController extends ControllerBase{
         //}else{echo 'Vous n'êtes pas autorisé à vous rendre ici.';}
     }
 
-    public function update($id){
+
+    public function updateSite($id){
         $site=DAO::getOne("models\Site", $id);
         RequestUtils::setValuesToObject($site,$_POST);
         if(DAO::update($site)){
             echo "Le site ".$site->getNom()." a été modifié.";
+        }
+    }
+
+    public function updateUti($id){
+        $user=DAO::getOne("models\Utilisateur", $id);
+        RequestUtils::setValuesToObject($user,$_POST);
+        if(DAO::update($user)){
+            echo "L'utilisateur ".$user->getNom()." a été modifié.";
         }
     }
 

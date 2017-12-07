@@ -45,10 +45,10 @@ class EcranController extends ControllerBase
         $semantic=$this->jquery->semantic();
 
         $cards=$semantic->htmlCardGroups("card5",[
-            ["Japon"],
+            ["https://static.pexels.com/photos/237180/pexels-photo-237180.jpeg"],
             ["card6"]]);
-        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img6.jpg","")->setFloated("right");
-        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img7.jpg","")->setFloated("left");
+        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img8.jpeg","")->setFloated("right");
+        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img8.jpeg","")->setFloated("left");
 
 
         echo $cards;
