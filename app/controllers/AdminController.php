@@ -7,6 +7,7 @@ use micro\utils\RequestUtils;
 use models;
 use models\Site;
 use models\Utilisateur;
+use Ajax\semantic\widgets\datatable\DataTable;
 
 /**
  * Controller AdminController
@@ -38,7 +39,7 @@ class AdminController extends ControllerBase{
         $table->setUrls(["","AdminController/editSite","AdminController/deleteSite"]);
         $table->setTargetSelector("#divSites");
 
-        echo $table->compile($this->jquery);
+        echo $table;
         echo $this->jquery->compile();
     }
 
@@ -61,7 +62,7 @@ class AdminController extends ControllerBase{
         $table->setUrls(["","AdminController/editUti","AdminController/deleteUti"]);
         $table->setTargetSelector("#divSites");
 
-        echo $table->compile($this->jquery);
+        echo $table;
         echo $this->jquery->compile();
     }
 

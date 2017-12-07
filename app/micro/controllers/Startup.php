@@ -128,7 +128,7 @@ class Startup {
 					break;
 			}
 		} catch ( \Exception $e ) {
-			print "Error!: " . $e->getMessage() . "<br/>";
+			throw $e;
 		}
 	}
 

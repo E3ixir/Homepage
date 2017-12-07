@@ -15,7 +15,7 @@ return array(
 		"templateEngine"=>'micro\views\engine\Twig',
 		"templateEngineOptions"=>array("cache"=>false),
 		"test"=>false,
-		"debug"=>false,
+		"debug"=>true,
 		"di"=>["jquery"=>function(){
 							$jquery=new Ajax\php\micro\JsUtils(["defer"=>true]);
 							$jquery->semantic(new Ajax\Semantic());
