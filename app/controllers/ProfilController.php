@@ -44,7 +44,6 @@ class ProfilController extends ControllerBase
 
         $user = DAO::getOne("models\Utilisateur",$_SESSION['user']->getId());
 
-
         RequestUtils::setValuesToObject($user,$_POST);
 
         if(DAO::update($user)){

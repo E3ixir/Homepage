@@ -173,6 +173,11 @@
 			color: white;
 		}
 
+		#bloc_aligne
+		{
+			display: flex;
+			width: 600px;
+		}
 
 	   
 

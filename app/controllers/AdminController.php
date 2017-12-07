@@ -6,6 +6,7 @@ use micro\orm\DAO;
 use micro\utils\RequestUtils;
 use models;
 use models\Site;
+use models\Utilisateur;
 
 /**
  * Controller AdminController
@@ -34,7 +35,7 @@ class AdminController extends ControllerBase{
         $table->setFields(["id","nom","latitude","longitude","ecart","fondEcran","couleur","ordre","options"]);
         $table->setCaptions(["Id","Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options", "Actions"]);
         $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
-        $table->setUrls(["","AdminController/edit","AdminController/deletesite"]);
+        $table->setUrls(["","AdminController/editSite","AdminController/deleteSite"]);
         $table->setTargetSelector("#divSites");
 
         echo $table->compile($this->jquery);
@@ -57,7 +58,7 @@ class AdminController extends ControllerBase{
         $table->setFields(["login","password","elementsMasques","fondecran","couleur","ordre"]);
         $table->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre"]);
         $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
-        $table->setUrls(["","AdminController/edit","AdminController/deleteuti"]);
+        $table->setUrls(["","AdminController/editUti","AdminController/deleteUti"]);
         $table->setTargetSelector("#divSites");
 
         echo $table->compile($this->jquery);
@@ -167,12 +168,12 @@ class AdminController extends ControllerBase{
     }
 
     public function deleteUti($id){
-        //  if(RequestUtils::isPost())
-        //{
-        //echo " - ".$id." - ";
+        $semantic=$this->jquery->semantic();
         $user=DAO::getOne("models\Utilisateur", $id);
-        $user instanceof models\Site && DAO::remove($user);
-        $this->forward("controllers\AdminController","allUti");
+        
+        if(DAO::remove($user)) {
+            echo $semantic->htmlMessage("#container-admin",$user->getLogin()." supprim&eacute;");
+        }
         //echo "l'utilisateur {$user} a bien été supprimé.";
         /*if($site instanceof models\Site && DAO::remove($site))
          {
@@ -200,7 +201,7 @@ class AdminController extends ControllerBase{
     public function editSite($id){
         //if($site=$this->_getSiteInGet()){
         $site=DAO::getOne("models\Site", $id);
-        $this->_form($site,"AdminController/update/".$id,$site->getLatitude(),$site->getLongitude());
+        $this->_form($site,"AdminController/updateSite/".$id,$site->getLatitude(),$site->getLongitude());
         //$site instanceof models\Site && DAO::update($site);
         //$this->jquery->postFormOnClick("#btValider","AdminController/update", "frmEdit","#divSites");
         //$this->jquery->compile($this->view);
@@ -208,21 +209,35 @@ class AdminController extends ControllerBase{
         //        $this->loadView("AdminController/edit.html");
         //}else{echo 'Vous n'êtes pas autorisé à vous rendre ici.';}
     }
+    
+    public function editUti($id){
+        //if($site=$this->_getSiteInGet()){
+        $user=DAO::getOne("models\Utilisateur", $id);
+        $this->_formi($user,"AdminController/updateUti/".$id,$user);
+        //$site instanceof models\Site && DAO::update($site);
+        //$this->jquery->postFormOnClick("#btValider","AdminController/update", "frmEdit","#divSites");
+        //$this->jquery->compile($this->view);
+        
+        //        $this->loadView("AdminController/edit.html");
+        //}else{echo 'Vous n'êtes pas autorisé à vous rendre ici.';}
+    }
 
 
     public function updateSite($id){
+        $semantic=$this->jquery->semantic();
         $site=DAO::getOne("models\Site", $id);
         RequestUtils::setValuesToObject($site,$_POST);
         if(DAO::update($site)){
-            echo "Le site ".$site->getNom()." a été modifié.";
+            echo $semantic->htmlMesaage("container-admin","Le site ".$site->getNom()." a été modifié.");
         }
     }
 
     public function updateUti($id){
+        $semantic=$this->jquery->semantic();
         $user=DAO::getOne("models\Utilisateur", $id);
         RequestUtils::setValuesToObject($user,$_POST);
         if(DAO::update($user)){
-            echo "L'utilisateur ".$user->getNom()." a été modifié.";
+            echo $semantic->htmlMessage("container-admin","L'utilisateur ".$user->getLogin()." a été modifié.");
         }
     }
 

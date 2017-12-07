@@ -19,10 +19,11 @@ class SiteController extends ControllerBase{
 
     public function initialize()
     {
-        $fond="";
+        $fond="http://localhost/homepage/assets/images/img6.jpg";
         if(isset($_SESSION["user"])){
             $user=$_SESSION["user"];
             $fond=$user->getFondEcran();
+            
         }
         if(!RequestUtils::isAjax()){
             $this->loadView("main/vHeader.html",["fond"=>$fond]);
@@ -83,6 +84,7 @@ class SiteController extends ControllerBase{
                 $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
                 $messCo->setDismissable();
                 echo $messCo->compile($this->jquery);
+
             } else {
                 echo $semantic->htmlMessage("#btCo","Erreur, votre mot de passe ou login est incorrecte.","red");
             }
