@@ -16,6 +16,22 @@ use Ajax\semantic\widgets\datatable\DataTable;
 
 class AdminController extends ControllerBase{
 
+    public function isValid()
+    {
+        if (!isset($_SESSION['user'])){
+           return false;
+        } elseif ($_SESSION['user']->getStatut()->getLibelle() != "Super administrateur"){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function onInvalidControl()
+    {
+        header("location:/homepage/SiteController");
+    }
+
     public function index(){
 
         $semantic=$this->jquery->semantic();

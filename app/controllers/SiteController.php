@@ -19,7 +19,7 @@ class SiteController extends ControllerBase{
 
     public function initialize()
     {
-        $fond="http://localhost/homepage/assets/images/img6.jpg";
+        $fond="http://localhost/homepage/assets/images/img9.jpeg";
         if(isset($_SESSION["user"])){
             $user=$_SESSION["user"];
             $fond=$user->getFondEcran();
