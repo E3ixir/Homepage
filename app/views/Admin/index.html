@@ -9,10 +9,12 @@
         <div class="container1">
             <div class='ui container'>
                 {{q['bts'] | raw}}
+                {{q["btRetour"] | raw }}
             </div>
             <div id="container-admin">
            	    <div id='divSites'></div>
                 <div id="map" style="width:500px;height:300px;">{{jsMap | raw}}</div>
+
             </div>	    
         </div>
             {{script_foot | raw}}

@@ -38,9 +38,12 @@ class AdminController extends ControllerBase{
         $bts=$semantic->htmlButtonGroups("bts",["Liste des sites","Ajout d'un site","Liste des utilisateurs","Ajout d'un utilisateur","Reinitialiser"]);
         $bts->setPropertyValues("data-ajax", ["allSite/","addSite/","allUti/","addUti","close/"]);
         $bts->getOnClick("AdminController/","#divSites",["attr"=>"data-ajax",]);
+        $bt_retour = $semantic->htmlButton("btRetour","Site","brown");
+        $bt_retour->addIcon("settings");
+        $bt_retour->asLink("SiteController");
         $this->jquery->compile($this->view);
         $this->loadView("Admin\index.html");
-        //$this->loadView("sites\index.html",["jsMap"=>$this->_generateMap(49.201491, -0.380734)]);
+
     }
 
     private function toutSite(){
