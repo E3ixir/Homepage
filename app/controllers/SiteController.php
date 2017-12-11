@@ -51,12 +51,12 @@ class SiteController extends ControllerBase{
         if(!isset($_SESSION['user'])){
             $btCo=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
             $btCo->addIcon("sign in");
-        } else {
+        } elseif ($_SESSION["user"]->getStatut()->getLibelle() == "Super administrateur"){
             $user=$_SESSION["user"];
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
             $messCo->setDismissable();
             $messCo->compile($this->jquery);
-            
+
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->setProperty("data-ajax","button-3");
             $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
@@ -64,8 +64,25 @@ class SiteController extends ControllerBase{
             $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Fond d'écran","Liste de vos favoris","Ajouter un favoris","Fermer"]);
             $bts->setPropertyValues("data-ajax",["ProfilController/","EcranController/modifecran","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
             $bts->getOnClick("","#list-site",["attr"=>"data-ajax"]);
-         }
-        
+            $bt_admin = $semantic->htmlButton("btAdmin","Administration","purple");
+            $bt_admin->addIcon("settings");
+            $bt_admin->asLink("AdminController");
+
+        }elseif (isset($_SESSION["user"])) {
+            $user = $_SESSION["user"];
+            $messCo = $semantic->htmlMessage("#btCo", "Bienvenue " . $user->getLogin(), "blue");
+            $messCo->setDismissable();
+            $messCo->compile($this->jquery);
+
+            $bt_deco = $semantic->htmlButton("button-3", "Se d&eacute;connecter", "red");
+            $bt_deco->setProperty("data-ajax", "button-3");
+            $bt_deco->getOnClick("SiteController/disconnected", "body", ["attr" => "data-ajax"]);
+
+            $bts = $semantic->htmlButtonGroups("button-1", ["Détails personnels", "Fond d'écran", "Liste de vos favoris", "Ajouter un favoris", "Fermer"]);
+            $bts->setPropertyValues("data-ajax", ["ProfilController/", "EcranController/modifecran", "SiteController/printLien/", "SiteController/ajoutfav/", "SiteController/close"]);
+            $bts->getOnClick("", "#list-site", ["attr" => "data-ajax"]);
+        }
+
         echo $frm->asModal();        
         $this->jquery->exec("$('#modal-connect').modal('show');",true);
         
