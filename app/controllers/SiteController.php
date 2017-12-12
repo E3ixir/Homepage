@@ -38,6 +38,7 @@ class SiteController extends ControllerBase{
         if(!isset($_SESSION['user'])){
             $btCo=$semantic->htmlButton("button-2","Se connecter","green","$('#modal-frm1').modal('show');");
             $btCo->addIcon("sign in");
+            $fondecran="http://localhost/homepage/assets/images/img8.jpeg";
         } elseif ($_SESSION["user"]->getStatut()->getLibelle() == "Super administrateur"){
             $user=$_SESSION["user"];
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
@@ -54,6 +55,7 @@ class SiteController extends ControllerBase{
             $bt_admin = $semantic->htmlButton("btAdmin","Administration","purple");
             $bt_admin->addIcon("settings");
             $bt_admin->asLink("AdminController");
+            $fondecran=$_SESSION['user']->getFondEcran();
 
         }elseif (isset($_SESSION["user"])) {
             $user = $_SESSION["user"];
@@ -61,18 +63,22 @@ class SiteController extends ControllerBase{
             $messCo->setDismissable();
             $messCo->compile($this->jquery);
 
-            $bt_deco = $semantic->htmlButton("button-3", "Se d&eacute;connecter", "red");
-            $bt_deco->setProperty("data-ajax", "button-3");
-            $bt_deco->getOnClick("SiteController/disconnected", "body", ["attr" => "data-ajax"]);
+            $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
+            $bt_deco->addIcon("sign out");
+            $bt_deco->asLink("SiteController/disconnected");
 
             $bts = $semantic->htmlButtonGroups("button-1", ["Détails personnels", "Fond d'écran", "Liste de vos favoris", "Ajouter un favoris", "Fermer"]);
             $bts->setPropertyValues("data-ajax", ["ProfilController/", "EcranController/modifecran", "SiteController/printLien/", "SiteController/ajoutfav/", "SiteController/close"]);
             $bts->getOnClick("", "#list-site", ["attr" => "data-ajax"]);
+            $fondecran=$_SESSION['user']->getFondEcran();
         }
 
         echo $frm->asModal();
+
         $this->jquery->exec("$('#modal-connect').modal('show');",true);
-        
+
+        $this->jquery->exec("$('body').attr('style','background: url(".$fondecran.") no-repeat fixed; background-size: cover;');",true);
+
         echo $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
     }
