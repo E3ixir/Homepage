@@ -25,7 +25,7 @@ class EcranController extends ControllerBase
 
         $this->_printData();
         $this->jquery->compile($this->view);
-        $this->loadview("sites/fondecran.html");
+        $this->loadview("main/vHeader.html");
     }
 
     /*public function modifecran(){

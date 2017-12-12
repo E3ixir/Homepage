@@ -17,19 +17,6 @@ use Ajax\bootstrap\html\HtmlForm;
  **/
 class SiteController extends ControllerBase{
 
-    public function initialize()
-    {
-        $fond="http://localhost/homepage/assets/images/img9.jpeg";
-        if(isset($_SESSION["user"])){
-            $user=$_SESSION["user"];
-            $fond=$user->getFondEcran();
-            
-        }
-        if(!RequestUtils::isAjax()){
-            $this->loadView("main/vHeader.html",["fond"=>$fond]);
-        }
-    }
-
     /**
      * @route("/all")
      */
@@ -58,8 +45,8 @@ class SiteController extends ControllerBase{
             $messCo->compile($this->jquery);
 
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
-            $bt_deco->setProperty("data-ajax","button-3");
-            $bt_deco->getOnClick("SiteController/disconnected","body",["attr"=>"data-ajax"]);
+            $bt_deco->addIcon("sign out");
+            $bt_deco->asLink("SiteController/disconnected");
 
             $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Fond d'écran","Liste de vos favoris","Ajouter un favoris","Fermer"]);
             $bts->setPropertyValues("data-ajax",["ProfilController/","EcranController/modifecran","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
@@ -83,7 +70,7 @@ class SiteController extends ControllerBase{
             $bts->getOnClick("", "#list-site", ["attr" => "data-ajax"]);
         }
 
-        echo $frm->asModal();        
+        echo $frm->asModal();
         $this->jquery->exec("$('#modal-connect').modal('show');",true);
         
         echo $this->jquery->compile($this->view);
@@ -114,6 +101,7 @@ class SiteController extends ControllerBase{
     public function disconnected(){
         session_unset();
         session_destroy();
+        header("location:/homepage/SiteController");
         $this->jquery->get("SiteController/index", "body");
         echo $this->jquery->compile($this->view);
     }

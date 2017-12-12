@@ -9,7 +9,11 @@ abstract class ControllerBase extends Controller{
 
 	public function initialize(){
 		if(!RequestUtils::isAjax()){
-			$this->loadView("main/vHeader.html");
+		    if(!isset($_SESSION['user'])){
+                $this->loadView("main/vHeader.html",["fond"=>"http://localhost/homepage/assets/images/img8.jpeg"]);
+            } elseif(isset($_SESSION['user'])){
+                $this->loadView("main/vHeader.html", ["fond"=>$_SESSION['user']->getFondEcran()]);
+            }
 		}
 	}
 
