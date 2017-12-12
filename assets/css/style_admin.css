@@ -24,11 +24,17 @@
     {
     	display: flex;
     	flex-direction: column;
-    	width: 100%;
-    	margin-top: 20px;;
+    	width: 80%;
+    	margin-top: 20px;
+    	margin-left: 34px;
     }
 
 	#map
 	{
 		float: left;
+	}
+	
+	#divSites
+	{
+		
 	}
