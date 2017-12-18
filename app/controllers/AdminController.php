@@ -42,7 +42,7 @@ class AdminController extends ControllerBase{
         $bt_retour->addIcon("settings");
         $bt_retour->asLink("SiteController");
         $this->jquery->compile($this->view);
-        $this->loadView("Admin\index.html");
+        $this->loadView("Admin/index.html");
 
     }
 
@@ -53,7 +53,7 @@ class AdminController extends ControllerBase{
         $table=$semantic->dataTable("tblSites", "models\Site", $sites);
         $table->setIdentifierFunction(function($i,$obj){return $obj->getId();});
         $table->setFields(["id","nom","latitude","longitude","ecart","fondEcran","couleur","ordre","options"]);
-        $table->setCaptions(["Id","Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options", "Actions"]);
+        $table->setCaptions(["Id","Nom","Latitude","Longitude","Ecart","Lien web","Couleur", "Ordre", "Options", "Actions"]);
         $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
         $table->setUrls(["","AdminController/editSite","AdminController/deleteSite"]);
         $table->setTargetSelector("#divSites");
@@ -76,7 +76,7 @@ class AdminController extends ControllerBase{
         $table=$semantic->dataTable("tblutilisateur", "models\Utilisateur", $user);
         $table->setIdentifierFunction(function($i,$obj){return $obj->getId();});
         $table->setFields(["login","password","elementsMasques","fondecran","couleur","ordre"]);
-        $table->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre"]);
+        $table->setCaptions(["Login","Password","Elements Masqués","Lien web","Couleur","Ordre"]);
         $table->addEditDeleteButtons(true,["ajaxTransition"=>"random","method"=>"post"]);
         $table->setUrls(["","AdminController/editUti","AdminController/deleteUti"]);
         $table->setTargetSelector("#divSites");
@@ -107,7 +107,7 @@ class AdminController extends ControllerBase{
         $form=$semantic->dataForm("frmSite", $site);
         $form->setValidationParams(["on"=>"blur", "inline"=>true]);
         $form->setFields(["nom\n","latitude","longitude","ecart\n","fondEcran\n","couleur\n","ordre\n","options\n","submit"]);
-        $form->setCaptions(["Nom","Latitude","Longitude","Ecart","Fond d'écran","Couleur", "Ordre", "Options","Valider"]);
+        $form->setCaptions(["Nom","Latitude","Longitude","Ecart","Lien web","Couleur", "Ordre", "Options","Valider"]);
         $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(3);}]);
         $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(3);}]);
@@ -137,8 +137,8 @@ class AdminController extends ControllerBase{
         $semantic->setLanguage("fr");
         $form=$semantic->dataForm("frmSite", $user);
         $form->setValidationParams(["on"=>"blur", "inline"=>true]);
-        $form->setFields(["login\n","password\n","fondEcran\n","Elements Masqués\n","Fond d'écran\n","Couleur\n","Ordre\n","submit"]);
-        $form->setCaptions(["Login","Password","Fond d'écran","Couleur", "Ordre", "Options","Valider"]);
+        $form->setFields(["login\n","password\n","fondEcran\n","Elements Masqués\n","Lien web\n","Couleur\n","Ordre\n","submit"]);
+        $form->setCaptions(["Login","Password","Lien web","Couleur", "Ordre", "Options","Valider"]);
         $form->fieldAsInput(0,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(3);}]);
         $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(3);}]);
