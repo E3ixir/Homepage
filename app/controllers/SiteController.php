@@ -82,11 +82,11 @@ class SiteController extends ControllerBase{
         echo $this->jquery->compile($this->view);
         $this->loadView("sites/index.html");
     }
-    
+
+    /**/
     public function connected(){
         $semantic=$this->jquery->semantic();
         $user=DAO::getOne("models\Utilisateur","login='".$_POST['login']."'");
-        
         if(isset($user)){
             if($user->getPassword()===$_POST['password']){
                 $_SESSION["user"]=$user;

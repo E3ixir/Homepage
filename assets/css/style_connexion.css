@@ -38,7 +38,7 @@ body
             float: left;
             width: 50%;
             height: 606px;
-            /*background: url(image/img4.jpg);*/    
+            background: url(../images/img4.jpg) no-repeat ;
             background-size: cover;
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
