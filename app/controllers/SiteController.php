@@ -22,8 +22,7 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-       
-        $frm=$semantic->defaultLogin("frm2");
+
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->removeField("remember");
@@ -42,15 +41,14 @@ class SiteController extends ControllerBase{
         } elseif ($_SESSION["user"]->getStatut()->getLibelle() == "Super administrateur"){
             $user=$_SESSION["user"];
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
-            $messCo->setDismissable();
             $messCo->compile($this->jquery);
 
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->addIcon("sign out");
             $bt_deco->asLink("SiteController/disconnected");
 
-            $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Fond d'écran","Liste de vos favoris","Ajouter un favoris","Fermer"]);
-            $bts->setPropertyValues("data-ajax",["ProfilController/","EcranController/modifecran","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
+            $bts=$semantic->htmlButtonGroups("button-1",["Détails personnels","Liste de vos favoris","Ajouter un favoris","Fermer"]);
+            $bts->setPropertyValues("data-ajax",["ProfilController/","SiteController/printLien/","SiteController/ajoutfav/","SiteController/close"]);
             $bts->getOnClick("","#list-site",["attr"=>"data-ajax"]);
             $bt_admin = $semantic->htmlButton("btAdmin","Administration","purple");
             $bt_admin->addIcon("settings");
@@ -60,15 +58,14 @@ class SiteController extends ControllerBase{
         }elseif (isset($_SESSION["user"])) {
             $user = $_SESSION["user"];
             $messCo = $semantic->htmlMessage("#btCo", "Bienvenue " . $user->getLogin(), "blue");
-            $messCo->setDismissable();
             $messCo->compile($this->jquery);
 
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->addIcon("sign out");
             $bt_deco->asLink("SiteController/disconnected");
 
-            $bts = $semantic->htmlButtonGroups("button-1", ["Détails personnels", "Fond d'écran", "Liste de vos favoris", "Ajouter un favoris", "Fermer"]);
-            $bts->setPropertyValues("data-ajax", ["ProfilController/", "EcranController/modifecran", "SiteController/printLien/", "SiteController/ajoutfav/", "SiteController/close"]);
+            $bts = $semantic->htmlButtonGroups("button-1", ["Détails personnels","Liste de vos favoris", "Ajouter un favoris", "Fermer"]);
+            $bts->setPropertyValues("data-ajax", ["ProfilController/","SiteController/printLien/", "SiteController/ajoutfav/", "SiteController/close"]);
             $bts->getOnClick("", "#list-site", ["attr" => "data-ajax"]);
             $fondecran=$_SESSION['user']->getFondEcran();
         }

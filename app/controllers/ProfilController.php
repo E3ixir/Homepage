@@ -28,7 +28,7 @@ class ProfilController extends ControllerBase
         $form=$semantic->dataForm("frmUser", $user);
 
         $form->setFields(["login","password","elementsMasques","fondecran","couleur","ordre","submit"]);
-        $form->setCaptions(["Login","Password","Elements Masqués","Fond d'écran","Couleur","Ordre","Valider"]);
+        $form->setCaptions(["Login","Password","Elements Masqués","Fond d'écran (insérer votre lien web)","Couleur","Ordre","Valider"]);
 
         $form->fieldAsSubmit("submit","orange","ProfilController/updateUser/".$id,"#msgUpdate");
     }

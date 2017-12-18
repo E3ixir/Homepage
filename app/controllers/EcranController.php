@@ -40,25 +40,5 @@ class EcranController extends ControllerBase
         $this->loadView("sites/fondecran.html");
     }*/
 
-    public function modifecran(){
-
-        $semantic=$this->jquery->semantic();
-
-        $cards=$semantic->htmlCardGroups("card5",[
-            ["https://static.pexels.com/photos/237180/pexels-photo-237180.jpeg"],
-            ["card6"]]);
-        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img8.jpeg","")->setFloated("right");
-        $cards->getCardContent(0,1)->addImage("http://localhost/homepage/assets/images/img8.jpeg","")->setFloated("left");
-
-
-        echo $cards;
-
-        echo $cards->compile($this->jquery);
-        echo $this->jquery->compile();
-
-
-    }
-
-
 
 }
