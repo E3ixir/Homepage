@@ -27,8 +27,7 @@ class SiteController extends ControllerBase{
      */
     public function index(){
         $semantic=$this->jquery->semantic();
-       
-        $frm=$semantic->defaultLogin("frm2");
+
         $frm=$semantic->defaultLogin("frm1");
         $frm->removeField("Connection");
         $frm->removeField("remember");
@@ -50,7 +49,6 @@ class SiteController extends ControllerBase{
         } elseif($_SESSION["user"]->getStatut()->getLibelle() == "Super administrateur") {
             $user=$_SESSION["user"];
             $messCo=$semantic->htmlMessage("#btCo","Bienvenue ".$user->getLogin(),"blue");
-            $messCo->setDismissable();
 
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->addIcon("sign out");
@@ -66,8 +64,7 @@ class SiteController extends ControllerBase{
 
         }elseif (isset($_SESSION["user"])) {
             $user = $_SESSION["user"];
-            $messCo = $semantic->htmlMessage("#btCo", "Bienvenue " . $user->getLogin(), "blue");
-            $messCo->setDismissable();
+            $messCo=$semantic->htmlMessage("#btCo", "Bienvenue " . $user->getLogin(), "blue");
 
             $bt_deco=$semantic->htmlButton("button-3","Se d&eacute;connecter","red");
             $bt_deco->addIcon("sign out");

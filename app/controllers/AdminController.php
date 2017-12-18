@@ -16,6 +16,10 @@ use Ajax\semantic\widgets\datatable\DataTable;
 
 class AdminController extends ControllerBase{
 
+    /*
+     * statut de la connexion
+     * l'administration du site n'est possible que si c'est un super admin
+     */
     public function isValid()
     {
         if (!isset($_SESSION['user'])){
@@ -26,12 +30,18 @@ class AdminController extends ControllerBase{
             return true;
         }
     }
+    /*
+     * retour site principal
+     */
 
     public function onInvalidControl()
     {
         header("location:/homepage/SiteController");
     }
 
+    /*
+     * fonction principale avec l'affichage de la barre
+     */
     public function index(){
 
         $semantic=$this->jquery->semantic();
@@ -46,6 +56,10 @@ class AdminController extends ControllerBase{
 
     }
 
+    /*
+     * affichage de tous les champs
+     * affichage de toutes les données présentes dans la BDD
+     */
     private function toutSite(){
 
         $sites=DAO::getAll("models\Site");
@@ -62,6 +76,9 @@ class AdminController extends ControllerBase{
         echo $this->jquery->compile();
     }
 
+    /*
+     * lance l'html de la page en admin
+     */
     public function allSite() {
 
         $this->toutsite();
@@ -69,6 +86,9 @@ class AdminController extends ControllerBase{
         $this->loadView("Admin\index.html");
     }
 
+    /*
+     * affichage des données utilisateurs dans la BDD
+     */
     private function toutUti(){
 
         $user=DAO::getAll("models\Utilisateur");
@@ -85,6 +105,9 @@ class AdminController extends ControllerBase{
         echo $this->jquery->compile();
     }
 
+    /*
+     * appel de la fonction dans la page html
+     */
     public function allUti() {
 
         $this->toututi();
@@ -92,14 +115,25 @@ class AdminController extends ControllerBase{
         $this->loadView("Admin\index.html");
     }
 
+    /*
+     * ajout d'un site dans la BDD
+     * spécification de sa latitude et longitude
+     */
     public function addSite(){
         $this->_form(new Site(),"AdminController/newSite/",49.201491,-0.380734);
     }
 
+    /*
+     * ajout d'un utilisateur dans la BDD
+     */
     public function addUti(){
         $this->_formi(new Utilisateur(),"AdminController/newUti/");
     }
 
+    /*
+     * lancement de la form
+     * champs de modification des données
+     */
     private function _form($site,$action,$lat,$long){
 
         $semantic=$this->jquery->semantic();
@@ -131,6 +165,9 @@ class AdminController extends ControllerBase{
         echo $this->jquery->compile();
     }
 
+    /*
+     * ajout et modification des paramètres utilisateur
+     */
     private function _formi($user,$action){
 
         $semantic=$this->jquery->semantic();
@@ -153,6 +190,9 @@ class AdminController extends ControllerBase{
         echo $this->jquery->compile();
     }
 
+    /*
+     * fonction qui ajoute un nouveau site et validation
+     */
     public function newSite(){
 
         $site=new Site();
@@ -162,6 +202,9 @@ class AdminController extends ControllerBase{
         }
     }
 
+    /*
+     * ajout d'un nouvel utilisateur et validation
+     */
     public function newUti(){
 
         $user=new Utilisateur();
@@ -171,6 +214,9 @@ class AdminController extends ControllerBase{
         }
     }
 
+    /*
+     * supression d'un site dans la BDD
+     */
     public function deleteSite($id){
         //  if(RequestUtils::isPost())
         //{
@@ -187,6 +233,9 @@ class AdminController extends ControllerBase{
         //else{echo "Vous n'êtes pas autorisé à vous rendre ici.";}
     }
 
+    /*
+     * supression d'un utlisateur de la BDD
+     */
     public function deleteUti($id){
         $semantic=$this->jquery->semantic();
         $user=DAO::getOne("models\Utilisateur", $id);
@@ -203,6 +252,9 @@ class AdminController extends ControllerBase{
         //else{echo "Vous n'êtes pas autorisé à vous rendre ici.";}
     }
 
+    /*
+     * retour du site
+     */
     public function _getSiteInGet(){
         //if(RequestUtils::isPost())
         {
@@ -218,31 +270,25 @@ class AdminController extends ControllerBase{
          }*/
     }
 
+    /*
+     * formulaire d'édition du site
+     */
     public function editSite($id){
-        //if($site=$this->_getSiteInGet()){
         $site=DAO::getOne("models\Site", $id);
         $this->_form($site,"AdminController/updateSite/".$id,$site->getLatitude(),$site->getLongitude());
-        //$site instanceof models\Site && DAO::update($site);
-        //$this->jquery->postFormOnClick("#btValider","AdminController/update", "frmEdit","#divSites");
-        //$this->jquery->compile($this->view);
-
-        //        $this->loadView("AdminController/edit.html");
-        //}else{echo 'Vous n'êtes pas autorisé à vous rendre ici.';}
     }
-    
+
+    /*
+     * formulaire d'édition de l'utilisateur
+     */
     public function editUti($id){
-        //if($site=$this->_getSiteInGet()){
         $user=DAO::getOne("models\Utilisateur", $id);
         $this->_formi($user,"AdminController/updateUti/".$id,$user);
-        //$site instanceof models\Site && DAO::update($site);
-        //$this->jquery->postFormOnClick("#btValider","AdminController/update", "frmEdit","#divSites");
-        //$this->jquery->compile($this->view);
-        
-        //        $this->loadView("AdminController/edit.html");
-        //}else{echo 'Vous n'êtes pas autorisé à vous rendre ici.';}
     }
 
-
+    /*
+     * mise à jour d'un site
+     */
     public function updateSite($id){
         $semantic=$this->jquery->semantic();
         $site=DAO::getOne("models\Site", $id);
@@ -252,6 +298,9 @@ class AdminController extends ControllerBase{
         }
     }
 
+    /*
+     * mise à jour de l'utilisateur
+     */
     public function updateUti($id){
         $semantic=$this->jquery->semantic();
         $user=DAO::getOne("models\Utilisateur", $id);
@@ -261,6 +310,11 @@ class AdminController extends ControllerBase{
         }
     }
 
+    /*
+     * fonction de la carte
+     * placement d'un marqueur sur la carte
+     * envoie des données dans les emplacements latitude et longitude
+     */
     private function _generateMap($lat,$long){
         return "
       <script>
