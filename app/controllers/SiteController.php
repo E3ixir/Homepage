@@ -10,12 +10,15 @@ use Ajax\semantic\html\collections\form\HtmlFormInput;
 use Ajax\semantic\widgets\business\user\FormLogin;
 use Ajax\semantic\widgets\dataform\DataForm;
 use Ajax\bootstrap\html\HtmlForm;
+use Ajax\semantic\html\elements\HtmlButton;
+
  
 /**
  * Controller SiteController
  * @property JsUtils $jquery
  **/
 class SiteController extends ControllerBase{
+
 
     /*
      * Fonction index()
@@ -172,7 +175,7 @@ class SiteController extends ControllerBase{
         $form->fieldAsInput(1,["jsCallback"=>function($input){$input->setWidth(8);}]);
         $form->fieldAsInput(2,["jsCallback"=>function($input){$input->setWidth(8);}]);
         
-        $form->fieldAsSubmit("submit","orange","SiteController/new","#list-site");
+        $form->fieldAsSubmit("submit","orange","SiteController/nouvelle","#list-site");
     }
     
     /*
@@ -270,6 +273,20 @@ class SiteController extends ControllerBase{
      * Elle permet simplement de rendre vide la partie se situant en dessous du menu utilisateur, comme lorsque celui-çi vient de se connecter
      */
     public function close(){
-        
+        $semantic=$this->jquery->semantic();
+        $i=1;
+        if(isset($_SESSION['user'])) {
+            $links = DAO::getAll("models\LienWeb", "idUtilisateur = " . $_SESSION['user']->getId());
+            foreach ($links as $link) {
+                $card = $semantic->htmlCard("card" . $i);
+                $img = $card->addImage("https://images.pexels.com/photos/39561/solar-flare-sun-eruption-energy-39561.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
+                $img->addDimmer(["on" => "hover", "opacity" => 0.5], HtmlButton::labeled("bt4", "naviguer vers", "space shuttle"))->setBlurring();
+                $img->asLink("http://".$link->getURL());
+                $card->addExtraContent($link->getLibelle())->addIcon("tree");
+                $i = $i + 1;
+                echo $card;
+            }
+        }
+        echo $this->jquery->compile($this->view);
     }
 }

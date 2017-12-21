@@ -76,4 +76,14 @@ body
 .bouton
 {
 	margin-left: 4px;
-} 
+}
+
+.card {
+	display: inline-block;
+	text-align: center;
+	width:50%;
+}
+
+.logo {
+	display: block;
+}

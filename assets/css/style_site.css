@@ -178,6 +178,17 @@
 			width: 600px;
 		}
 
+		.ui.card {
+			display: inline-block;
+			text-align: center;
+			width:45%;
+			margin-right: 10px;
+		}
+
+		.logo {
+			display: block;
+		}
+
 	   
 
 
